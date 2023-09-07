@@ -9,6 +9,8 @@ import UIKit
 import FirebaseStorage
 
 struct ImageUploader {
+    
+    // MARK: - Upload_Image
     static func uploadImage(image: UIImage, completion: @escaping (String) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
         let fileName = NSUUID().uuidString
@@ -22,6 +24,10 @@ struct ImageUploader {
             }
             
             ref.downloadURL { url, error in
+                if let error = error {
+                    print("downloadUrl error ----- \(error.localizedDescription)")
+                }
+                
                 guard let imageUrl = url?.absoluteString else { return }
                 completion(imageUrl)
             }

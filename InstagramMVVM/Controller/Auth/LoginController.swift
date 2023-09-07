@@ -13,6 +13,7 @@ final class LoginController: UIViewController {
     private var viewModel = LoginViewModel()
     
     
+    weak var delegate: AuthenticationDelegate?
     
     
     
@@ -25,19 +26,19 @@ final class LoginController: UIViewController {
     
     
     
+    
     // MARK: - TextField
     private lazy var emailTextField: UITextField = {
-        let tf = UITextField().loginTextField(keyboardType: .emailAddress,
+        return UITextField().loginTextField(keyboardType: .emailAddress,
                                               placeholerText: "Email")
-        return tf
     }()
     
     private lazy var passwordTextField: UITextField = {
-        let tf = UITextField().loginTextField(keyboardType: .emailAddress,
+        return UITextField().loginTextField(keyboardType: .emailAddress,
                                               placeholerText: "Password",
                                               isSecure: true)
-        return tf
     }()
+    
     
     
     
@@ -49,7 +50,6 @@ final class LoginController: UIViewController {
                                        axis: .vertical,
                                        spacing: 13)
     }()
-    
     
     
     
@@ -84,15 +84,14 @@ final class LoginController: UIViewController {
     
     
     
-    
-    
-    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
         self.configureNotificationObservers()
     }
+    
+    
     
     
     
@@ -128,10 +127,9 @@ final class LoginController: UIViewController {
     
     
     
-    
     private func configureNotificationObservers() {
-        self.emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-        self.passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        self.emailTextField.addTarget(self, action: #selector(self.textDidChange), for: .editingChanged)
+        self.passwordTextField.addTarget(self, action: #selector(self.textDidChange), for: .editingChanged)
     }
     
     
@@ -146,6 +144,7 @@ final class LoginController: UIViewController {
     // MARK: - Selectors
     @objc private func handleShowSignUp() {
         let controller = RegisterationController()
+            controller.delegate = self.delegate
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -162,13 +161,16 @@ final class LoginController: UIViewController {
         guard let email = self.emailTextField.text,
               let password = self.passwordTextField.text else { return }
         AuthService.logUserIn(email: email, password: password) {
-            self.dismiss(animated: true)
+            self.delegate?.authenticationComplete()
         }
     }
 }
 
 
 
+
+
+// MARK: - FormViewMocel
 extension LoginController: FormViewMocel {
     func updateForm() {
         self.loginBtn.isEnabled = self.viewModel.formIsValid

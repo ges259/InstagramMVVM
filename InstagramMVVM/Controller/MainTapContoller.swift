@@ -7,10 +7,17 @@
 
 import UIKit
 import FirebaseAuth
+import YPImagePicker
+
 final class MainTabContoller: UITabBarController {
     
     // MARK: - Properties
-    
+    var user: User? {
+        didSet {
+            guard let user = self.user else { return }
+            self.configureViewControllers(withUser: user)
+        }
+    }
     
     
     
@@ -21,8 +28,6 @@ final class MainTabContoller: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        self.configureViewControllers()
         self.checkUser()
     }
     
@@ -32,9 +37,12 @@ final class MainTabContoller: UITabBarController {
     
     
     // MARK: - Helper_Funtions
-    private func configureViewControllers() {
+    private func configureViewControllers(withUser user: User) {
         self.tabBar.tintColor = UIColor.black
         self.navigationController?.navigationBar.barStyle = .default
+        
+        // Main_TabBar_Controller_Delegate
+        self.delegate = self
         
         // Feed_Controller
         let feedLayout = UICollectionViewFlowLayout()
@@ -62,11 +70,11 @@ final class MainTabContoller: UITabBarController {
             rootController: NotificationsController())
 
         // Profile_Controller
-        let profileLayout = UICollectionViewFlowLayout()
+        let profileController = ProfileController(user: user)
         let profile = self.templateNavContoller(
             unselectedImg: #imageLiteral(resourceName: "profile_unselected"),
             selectedImg: #imageLiteral(resourceName: "profile_selected"),
-            rootController: ProfileController(collectionViewLayout: profileLayout))
+            rootController: profileController)
 
         // TabBar에 추가
         self.viewControllers = [feed, search, imageSelector, notifications, profile]
@@ -81,6 +89,24 @@ final class MainTabContoller: UITabBarController {
             nav.navigationBar.tintColor = UIColor.black
         return nav
     }
+    
+    func didFinishPickerMedia(_ picker: YPImagePicker) {
+        picker.didFinishPicking { items, cancelled in
+            picker.dismiss(animated: false) {
+                guard let selectedImg = items.singlePhoto?.image else { return }
+                
+                let controller = UploadPostController()
+                    controller.selectedImg = selectedImg
+                    controller.delegate = self
+                let nav = UINavigationController(rootViewController: controller)
+                    nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: false)
+            }
+        }
+    }
+    
+    
+    
     
     
     
@@ -97,13 +123,71 @@ final class MainTabContoller: UITabBarController {
     
     // MARK: - API
     private func checkUser() {
+        // User가 없다면
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let controller = LoginController()
+                    controller.delegate = self
                 let nav = UINavigationController(rootViewController: controller)
                     nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: false)
             }
+            
+            
+        // User가 있다면
+        } else { self.fetchUser() }
+    }
+    
+    private func fetchUser() {
+        UserService.fetchUser { user in
+            self.user = user
         }
+    }
+}
+
+
+// MARK: - AuthenticationDelegate
+extension MainTabContoller: AuthenticationDelegate {
+    func authenticationComplete() {
+        self.fetchUser()
+        self.dismiss(animated: true)
+    }
+}
+
+
+
+// MARK: - UITabBarControllerDelegate
+extension MainTabContoller: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = self.viewControllers?.firstIndex(of: viewController)
+
+        if index == 2 {
+            var config = YPImagePickerConfiguration()
+                config.library.mediaType = .photo
+                config.shouldSaveNewPicturesToAlbum = false
+                config.startOnScreen = .library
+                config.screens = [.library]
+                config.hidesStatusBar = false
+                config.hidesBottomBar = false
+                config.library.maxNumberOfItems = 1
+            
+            let picker = YPImagePicker(configuration: config)
+                picker.modalPresentationStyle = .fullScreen
+            
+            self.present(picker, animated: true)
+            
+            self.didFinishPickerMedia(picker)
+        }
+        return true
+    }
+}
+
+
+
+
+extension MainTabContoller: UploadPostControllerDelegate {
+    func controllerDidFinishUploadingPost(_ controller: UploadPostController) {
+        self.selectedIndex = 0
+        controller.dismiss(animated: true)
     }
 }

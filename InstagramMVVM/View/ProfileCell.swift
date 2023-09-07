@@ -12,6 +12,14 @@ final class ProfileCell: UICollectionViewCell {
     // MARK: - Properties
     
     
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - ImageView
     private let postImageView: UIImageView = {
         return UIImageView().imageConfig()
     }()
@@ -33,18 +41,16 @@ final class ProfileCell: UICollectionViewCell {
     }
     
     
+    
     // MARK: - Helper_Functions
     private func configureUI() {
-        
+        // MARK: - Fix
+        self.postImageView.image = UIImage(named: "venom-7")
         self.addSubview(self.postImageView)
         self.postImageView.anchor(top: self.topAnchor,
                                   bottom: self.bottomAnchor,
                                   leading: self.leadingAnchor,
                                   trailing: self.trailingAnchor)
-        
-        
-        // MARK: - Fix
-//        self.postImageView.image = UIImage(named: "venom-7")
     }
     
     

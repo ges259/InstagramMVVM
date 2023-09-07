@@ -6,7 +6,28 @@
 //
 
 import FirebaseDatabase
+import Firebase
 
 let DB_REF: DatabaseReference = Database.database().reference()
 
 let USER_REF: DatabaseReference = DB_REF.child("users")
+let FOLLOWERS_REF: DatabaseReference = DB_REF.child("followers")
+let FOLLOWING_REF: DatabaseReference = DB_REF.child("following")
+let POSTS_REF: DatabaseReference = DB_REF.child("posts")
+
+
+struct DBString {
+    static let uid: String = "uid"
+    static let email: String = "email"
+    static let fullName: String = "fullName"
+    static let userName: String = "userName"
+    static let profileImgUrl: String = "profileImgUrl"
+    
+    static let caption: String = "caption"
+    static let timeStamp: String = "timeStamp"
+    static let likes: String = "likes"
+    static let postImageUrl: String = "postImageUrl"
+    static let postOwnerUid: String = "postOwnerUid"
+    
+}
+

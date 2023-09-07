@@ -27,6 +27,17 @@
 		5F5AEA7D2AA7735400E25835 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AEA7C2AA7735400E25835 /* Extensions.swift */; };
 		5F78E1952AA81EBF00B7F48A /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F78E1942AA81EBF00B7F48A /* ProfileCell.swift */; };
 		5F78E1972AA81F1300B7F48A /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F78E1962AA81F1300B7F48A /* ProfileHeader.swift */; };
+		5F83760D2AA8D9C1003FAD7E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F83760C2AA8D9C1003FAD7E /* UserService.swift */; };
+		5F83760F2AA8DB2D003FAD7E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F83760E2AA8DB2D003FAD7E /* User.swift */; };
+		5F8376112AA8E003003FAD7E /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8376102AA8E003003FAD7E /* ProfileHeaderViewModel.swift */; };
+		5F8376142AA8EB00003FAD7E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8376132AA8EB00003FAD7E /* SDWebImage */; };
+		5F8376162AA9055E003FAD7E /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8376152AA9055E003FAD7E /* SearchTableCell.swift */; };
+		5F8376182AA924A2003FAD7E /* SearchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8376172AA924A2003FAD7E /* SearchTableViewModel.swift */; };
+		5F96829E2AA96D5A00BCEFC7 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5F96829D2AA96D5A00BCEFC7 /* YPImagePicker */; };
+		5F9682A02AA979FC00BCEFC7 /* UploadPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F96829F2AA979FC00BCEFC7 /* UploadPostController.swift */; };
+		5F9682A32AA98EAF00BCEFC7 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9682A22AA98EAF00BCEFC7 /* InputTextView.swift */; };
+		5F9682A52AA995CC00BCEFC7 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9682A42AA995CC00BCEFC7 /* PostService.swift */; };
+		5F9682A82AA9A51300BCEFC7 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9682A72AA9A51300BCEFC7 /* JGProgressHUD */; };
 		5FA29C572AA7E5CF000C90CF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5FA29C562AA7E5CF000C90CF /* FirebaseAuth */; };
 		5FA29C592AA7E5CF000C90CF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 5FA29C582AA7E5CF000C90CF /* FirebaseDatabase */; };
 		5FA29C5B2AA7E5CF000C90CF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5FA29C5A2AA7E5CF000C90CF /* FirebaseStorage */; };
@@ -58,6 +69,14 @@
 		5F5AEA7C2AA7735400E25835 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5F78E1942AA81EBF00B7F48A /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		5F78E1962AA81F1300B7F48A /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		5F83760C2AA8D9C1003FAD7E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		5F83760E2AA8DB2D003FAD7E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5F8376102AA8E003003FAD7E /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		5F8376152AA9055E003FAD7E /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
+		5F8376172AA924A2003FAD7E /* SearchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewModel.swift; sourceTree = "<group>"; };
+		5F96829F2AA979FC00BCEFC7 /* UploadPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostController.swift; sourceTree = "<group>"; };
+		5F9682A22AA98EAF00BCEFC7 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
+		5F9682A42AA995CC00BCEFC7 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		5FA29C5C2AA7EBAF000C90CF /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		5FA29C5E2AA7EDAF000C90CF /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		5FA29C602AA7F3DE000C90CF /* DBString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBString.swift; sourceTree = "<group>"; };
@@ -69,7 +88,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FA29C592AA7E5CF000C90CF /* FirebaseDatabase in Frameworks */,
+				5F96829E2AA96D5A00BCEFC7 /* YPImagePicker in Frameworks */,
 				5FA29C572AA7E5CF000C90CF /* FirebaseAuth in Frameworks */,
+				5F8376142AA8EB00003FAD7E /* SDWebImage in Frameworks */,
+				5F9682A82AA9A51300BCEFC7 /* JGProgressHUD in Frameworks */,
 				5FA29C5B2AA7E5CF000C90CF /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				5F3AAA0E2AA7C09400D06E0B /* AuthenticationViewModel.swift */,
+				5F8376102AA8E003003FAD7E /* ProfileHeaderViewModel.swift */,
+				5F8376172AA924A2003FAD7E /* SearchTableViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -132,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				5F5AEA7A2AA7728000E25835 /* FeedCell.swift */,
+				5F8376152AA9055E003FAD7E /* SearchTableCell.swift */,
 				5F78E1942AA81EBF00B7F48A /* ProfileCell.swift */,
 				5F78E1962AA81F1300B7F48A /* ProfileHeader.swift */,
 				5F3AAA0D2AA7C07C00D06E0B /* ViewModel */,
@@ -142,6 +167,7 @@
 		5F5AEA682AA7618E00E25835 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5F83760E2AA8DB2D003FAD7E /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,11 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				5F5AEA6C2AA761FC00E25835 /* MainTapContoller.swift */,
-				5F5AEA6E2AA7633B00E25835 /* FeedController.swift */,
-				5F5AEA702AA7634600E25835 /* SearchContoller.swift */,
-				5F5AEA722AA7635500E25835 /* ImageSelectorController.swift */,
-				5F5AEA742AA7637D00E25835 /* NotificationsController.swift */,
-				5F5AEA762AA7638B00E25835 /* ProfileController.swift */,
+				5F96829F2AA979FC00BCEFC7 /* UploadPostController.swift */,
+				5F9682A12AA97A0900BCEFC7 /* TabBar */,
 				5F3AAA082AA798CD00D06E0B /* Auth */,
 			);
 			path = Controller;
@@ -165,6 +188,8 @@
 			children = (
 				5FA29C5C2AA7EBAF000C90CF /* ImageUploader.swift */,
 				5FA29C5E2AA7EDAF000C90CF /* AuthService.swift */,
+				5F83760C2AA8D9C1003FAD7E /* UserService.swift */,
+				5F9682A42AA995CC00BCEFC7 /* PostService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -176,8 +201,21 @@
 				5F3AAA102AA7D06E00D06E0B /* Protocols.swift */,
 				5FA29C602AA7F3DE000C90CF /* DBString.swift */,
 				5F5AEA782AA76D9300E25835 /* Constants.swift */,
+				5F9682A22AA98EAF00BCEFC7 /* InputTextView.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		5F9682A12AA97A0900BCEFC7 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				5F5AEA6E2AA7633B00E25835 /* FeedController.swift */,
+				5F5AEA702AA7634600E25835 /* SearchContoller.swift */,
+				5F5AEA722AA7635500E25835 /* ImageSelectorController.swift */,
+				5F5AEA742AA7637D00E25835 /* NotificationsController.swift */,
+				5F5AEA762AA7638B00E25835 /* ProfileController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +238,9 @@
 				5FA29C562AA7E5CF000C90CF /* FirebaseAuth */,
 				5FA29C582AA7E5CF000C90CF /* FirebaseDatabase */,
 				5FA29C5A2AA7E5CF000C90CF /* FirebaseStorage */,
+				5F8376132AA8EB00003FAD7E /* SDWebImage */,
+				5F96829D2AA96D5A00BCEFC7 /* YPImagePicker */,
+				5F9682A72AA9A51300BCEFC7 /* JGProgressHUD */,
 			);
 			productName = InstagramMVVM;
 			productReference = 5F5AEA502AA7613500E25835 /* InstagramMVVM.app */;
@@ -231,6 +272,9 @@
 			mainGroup = 5F5AEA472AA7613500E25835;
 			packageReferences = (
 				5FA29C552AA7E5CF000C90CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5F8376122AA8EB00003FAD7E /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				5F96829C2AA96D5A00BCEFC7 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
+				5F9682A62AA9A51300BCEFC7 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = 5F5AEA512AA7613500E25835 /* Products */;
 			projectDirPath = "";
@@ -261,7 +305,9 @@
 			files = (
 				5F3AAA0C2AA798FF00D06E0B /* RegistrationController.swift in Sources */,
 				5FA29C5D2AA7EBAF000C90CF /* ImageUploader.swift in Sources */,
+				5F9682A02AA979FC00BCEFC7 /* UploadPostController.swift in Sources */,
 				5FA29C5F2AA7EDAF000C90CF /* AuthService.swift in Sources */,
+				5F8376182AA924A2003FAD7E /* SearchTableViewModel.swift in Sources */,
 				5F5AEA6D2AA761FC00E25835 /* MainTapContoller.swift in Sources */,
 				5F5AEA752AA7637D00E25835 /* NotificationsController.swift in Sources */,
 				5FA29C612AA7F3DE000C90CF /* DBString.swift in Sources */,
@@ -269,12 +315,18 @@
 				5F5AEA6F2AA7633B00E25835 /* FeedController.swift in Sources */,
 				5F78E1972AA81F1300B7F48A /* ProfileHeader.swift in Sources */,
 				5F3AAA0F2AA7C09400D06E0B /* AuthenticationViewModel.swift in Sources */,
+				5F83760F2AA8DB2D003FAD7E /* User.swift in Sources */,
 				5F5AEA7B2AA7728000E25835 /* FeedCell.swift in Sources */,
+				5F8376112AA8E003003FAD7E /* ProfileHeaderViewModel.swift in Sources */,
 				5F5AEA542AA7613500E25835 /* AppDelegate.swift in Sources */,
+				5F9682A32AA98EAF00BCEFC7 /* InputTextView.swift in Sources */,
+				5F8376162AA9055E003FAD7E /* SearchTableCell.swift in Sources */,
 				5F5AEA792AA76D9300E25835 /* Constants.swift in Sources */,
 				5F5AEA7D2AA7735400E25835 /* Extensions.swift in Sources */,
+				5F83760D2AA8D9C1003FAD7E /* UserService.swift in Sources */,
 				5F5AEA772AA7638B00E25835 /* ProfileController.swift in Sources */,
 				5F5AEA732AA7635500E25835 /* ImageSelectorController.swift in Sources */,
+				5F9682A52AA995CC00BCEFC7 /* PostService.swift in Sources */,
 				5F78E1952AA81EBF00B7F48A /* ProfileCell.swift in Sources */,
 				5F5AEA712AA7634600E25835 /* SearchContoller.swift in Sources */,
 				5F5AEA562AA7613500E25835 /* SceneDelegate.swift in Sources */,
@@ -486,6 +538,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5F8376122AA8EB00003FAD7E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+		5F96829C2AA96D5A00BCEFC7 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Yummypets/YPImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		5F9682A62AA9A51300BCEFC7 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		5FA29C552AA7E5CF000C90CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -497,6 +573,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5F8376132AA8EB00003FAD7E /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F8376122AA8EB00003FAD7E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		5F96829D2AA96D5A00BCEFC7 /* YPImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F96829C2AA96D5A00BCEFC7 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
+			productName = YPImagePicker;
+		};
+		5F9682A72AA9A51300BCEFC7 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9682A62AA9A51300BCEFC7 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
 		5FA29C562AA7E5CF000C90CF /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5FA29C552AA7E5CF000C90CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

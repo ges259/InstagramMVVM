@@ -8,8 +8,11 @@
 import Foundation
 
 
-struct Idenrifier {
+struct Identifier {
     static let feed_Col_Cell: String = "feedCell"
     static let profile_Col_Cell: String = "profileCell"
     static let profile_Header: String = "profileHeader"
+    
+    static let Search_Ta_cell: String = "SearchCell"
+    
 }

@@ -16,7 +16,22 @@ protocol AuthenticationViewModel {
 protocol FormViewMocel {
     func updateForm()
 }
+protocol AuthenticationDelegate: AnyObject {
+    func authenticationComplete()
+}
+// profileHeader
+protocol ProfileHeaderDelegate: AnyObject {
+    func header(_ profileHeader: ProfileHeader, didTapActionBtnFor user: User)
+//    func header(_ profileHeader: ProfileHeader, wantsToUnFollow uid: String)
+//    func headerWantsToShowEditProfile(_ profileHeader: ProfileHeader)
+}
 
+
+
+// [UploadPostController]
+protocol UploadPostControllerDelegate: AnyObject {
+    func controllerDidFinishUploadingPost(_ controller: UploadPostController)
+}
 
 
 

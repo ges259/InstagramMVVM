@@ -6,35 +6,41 @@
 //
 
 import UIKit
-//import JGProgressHUD
+import JGProgressHUD
 
-//extension UIViewController {
-//    static let hud = JGProgressHUD(style: .dark)
-//
-//    func configureGradientLayer() {
-//        let gradient = CAGradientLayer()
-//        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-//        gradient.locations = [0, 1]
-//        view.layer.addSublayer(gradient)
-//        gradient.frame = view.frame
-//    }
-//
-//    func showLoader(_ show: Bool) {
-//        view.endEditing(true)
-//
-//        if show {
-//            UIViewController.hud.show(in: view)
-//        } else {
-//            UIViewController.hud.dismiss()
-//        }
-//    }
-//
-//    func showMessage(withTitle title: String, message: String) {
-//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//        present(alert, animated: true, completion: nil)
-//    }
-//}
+
+
+// MARK: - UIViewController
+extension UIViewController {
+    static let hud = JGProgressHUD(style: .dark)
+
+    func configureGradientLayer() {
+        // Gradient_Layer
+        let gradient = CAGradientLayer()
+            gradient.colors = [UIColor.systemPurple.cgColor,
+                           UIColor.systemBlue.cgColor]
+            gradient.locations = [0, 1]
+            gradient.frame = view.frame
+        self.view.layer.addSublayer(gradient)
+    }
+
+    func showLoader(_ show: Bool) {
+        self.view.endEditing(true)
+
+        if show {
+            UIViewController.hud.show(in: view)
+        } else {
+            UIViewController.hud.dismiss()
+        }
+    }
+
+    func showMessage(withTitle title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+}
 
 
 
@@ -213,6 +219,13 @@ extension UIView {
                leading: view.leadingAnchor,
                trailing: view.trailingAnchor)
     }
+    
+    
+    func backgroundColorView(color: UIColor) -> UIView {
+        let view = UIView()
+            view.backgroundColor = color
+        return view
+    }
 }
 
 
@@ -230,7 +243,7 @@ enum FontStyle {
 extension UILabel {
     func labelConfig(labelText: String = "",
                      textColor: UIColor = UIColor.black,
-                     fontName: FontStyle = .bold,
+                     fontName: FontStyle = .system,
                      fontSize: CGFloat = 12)
     -> UILabel {
         let lbl = UILabel()
@@ -244,9 +257,6 @@ extension UILabel {
         lbl.font = fontName == .bold
             ? UIFont.boldSystemFont(ofSize: fontSize)
             : UIFont.systemFont(ofSize: fontSize)
-        
-        
-        lbl.font = UIFont.systemFont(ofSize: 13)
         return lbl
     }
     
@@ -325,6 +335,16 @@ extension UITextField {
         tf.heightAnchor.constraint(equalToConstant: 45).isActive = true
         return tf
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -388,26 +408,18 @@ extension NSMutableAttributedString {
 
 
 
-// MARK: - UIViewController
-extension UIViewController {
-    
-    func configureGradientLayer() {
-        // Gradient_Layer
-        let gradient = CAGradientLayer()
-            gradient.colors = [UIColor.systemPurple.cgColor,
-                           UIColor.systemBlue.cgColor]
-            gradient.locations = [0, 1]
-            gradient.frame = view.frame
-        self.view.layer.addSublayer(gradient)
-    }
-}
 
 
 
+
+// MARK: - UIImageView
 extension UIImageView {
-    func imageConfig() -> UIImageView {
+    func imageConfig(userInteraction: Bool = false) -> UIImageView {
         let img = UIImageView()
             img.contentMode = UIView.ContentMode.scaleAspectFill
+        if userInteraction == true {
+            img.isUserInteractionEnabled = true
+        }
         return img
     }
 }

@@ -7,57 +7,50 @@
 
 import UIKit
 
+
+
 final class ProfileHeader: UICollectionReusableView {
     
     // MARK: - Properties
+    var viewModel: ProfileHeaderViewModel? { didSet { configure() } }
+    
+    // Delegate
+    weak var delegate: ProfileHeaderDelegate?
     
     
     
     
     
     
-    
-    
-    
-    
-    
+    // MARK: - Image_View
     private let profileImageView: UIImageView = {
         return UIImageView().imageConfig()
     }()
     
     
     
-    // MARK: - Label
-    private let nameLabel: UILabel = {
-        return UILabel().labelConfig(labelText: "Eddie Brock",
-                                     fontName: .bold,
-                                     fontSize: 14)
-    }()
-    private lazy var postLabel: UILabel = {
-        let lbl = UILabel().profileLabel()
-            lbl.attributedText = self.labelAttributedTxt(int: 1, string: "post")
-        return lbl
-    }()
-    private lazy var followersLabel: UILabel = {
-        let lbl = UILabel().profileLabel()
-            lbl.attributedText = self.labelAttributedTxt(int: 1, string: "followers")
-        return lbl
-    }()
-    private lazy var followingLabel: UILabel = {
-        let lbl = UILabel().profileLabel()
-            lbl.attributedText = self.labelAttributedTxt(int: 1, string: "following")
-        
-        return lbl
-    }()
-    
     
     // MARK: - Button
+    private let nameLabel: UILabel = {
+        return UILabel().labelConfig(fontName: .bold,
+                                     fontSize: 14)
+    }()
+    
+    private lazy var postLabel: UILabel = {
+        return UILabel().profileLabel()
+    }()
+    private lazy var followersLabel: UILabel = {
+        return UILabel().profileLabel()
+    }()
+    private lazy var followingLabel: UILabel = {
+        return UILabel().profileLabel()
+    }()
+    
     private lazy var editProfileBtn: UIButton = {
-        let btn = UIButton().buttonConfig(title: "Edit Prifile",
+        let btn = UIButton().buttonConfig(title: "Loading",
                                           fontName: FontStyle.bold,
                                           fontSize: 14,
                                           borderColor: UIColor.lightGray)
-        
             btn.addTarget(self, action: #selector(self.handleEditPrifileBtnTap), for: .touchUpInside)
         return btn
     }()
@@ -98,14 +91,10 @@ final class ProfileHeader: UICollectionReusableView {
     
     // MARK: - UIView
     private let topSeparator: UIView = {
-        let view = UIView()
-            view.backgroundColor = .black
-        return view
+        return UIView().backgroundColorView(color: UIColor.black)
     }()
     private let bottomSeparator: UIView = {
-        let view = UIView()
-            view.backgroundColor = .black
-        return view
+        return UIView().backgroundColorView(color: UIColor.black)
     }()
     
     
@@ -127,11 +116,6 @@ final class ProfileHeader: UICollectionReusableView {
     
     // MARK: - Helper_Functions
     private func configureUI() {
-        
-        
-        
-        // MARK: - Fix
-        self.profileImageView.image = UIImage(named: "venom-7")
         // Auto_layout
         // profileImageView
         self.addSubview(self.profileImageView)
@@ -142,7 +126,7 @@ final class ProfileHeader: UICollectionReusableView {
         // nameLabel
         self.addSubview(self.nameLabel)
         self.nameLabel.anchor(top: self.profileImageView.bottomAnchor, paddingTop: 12,
-                              leading: self.leadingAnchor, paddingLeading: 12)
+                              centerX: self.profileImageView)
         // editProfileBtn
         self.addSubview(self.editProfileBtn)
         self.editProfileBtn.anchor(top: self.nameLabel.bottomAnchor, paddingTop: 16,
@@ -171,19 +155,26 @@ final class ProfileHeader: UICollectionReusableView {
                                     leading: self.leadingAnchor,
                                     trailing: self.trailingAnchor,
                                     height: 0.5)
-        
-        
-        
     }
-    func labelAttributedTxt(int: Int, string: String) -> NSMutableAttributedString {
-        return NSMutableAttributedString().attributedText(type1TextString: "\(int)\n",
-                                                          type1FontName: .bold,
-                                                          type1FontSize: 14,
-                                                          type1Foreground: UIColor.black,
-                                                          type2TextString: string,
-                                                          type2FontSize: 14,
-                                                          type2Foreground: UIColor.lightGray)
+
+    
+    
+    
+    private func configure() {
+        guard let viewModel = self.viewModel else { return }
+        
+        self.nameLabel.text = viewModel.fullName
+        self.profileImageView.sd_setImage(with: viewModel.profileImgUrl)
+        
+        self.postLabel.attributedText = viewModel.numPosts
+        self.followersLabel.attributedText = viewModel.numFollowers
+        self.followingLabel.attributedText = viewModel.numFollowing
+        
+        self.editProfileBtn.setTitle(viewModel.followBtnText, for: .normal)
+        self.editProfileBtn.setTitleColor(viewModel.followBtnTitleColor, for: .normal)
+        self.editProfileBtn.backgroundColor = viewModel.followBtnBackgroundColor
     }
+    
      
     
     
@@ -192,13 +183,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     // MARK: - Selectors
     @objc private func handleEditPrifileBtnTap() {
-        print(#function)
+        guard let viewModel = self.viewModel else { return }
+        self.delegate?.header(self, didTapActionBtnFor: viewModel.user)
     }
-    
-    
-    
-    
-    
-    
-    
 }

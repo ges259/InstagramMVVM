@@ -18,17 +18,16 @@ final class FeedCell: UICollectionViewCell {
     
     // MARK: - Image_View
     private lazy var profileImgView: UIImageView = {
-        let img = UIImageView(image: #imageLiteral(resourceName: "venom-7"))
-        img.contentMode = .scaleAspectFill
-        img.isUserInteractionEnabled = true
+        let img = UIImageView(image: #imageLiteral(resourceName: "venom-7")).imageConfig(userInteraction: true)
+//        img.contentMode = .scaleAspectFill
+//        img.isUserInteractionEnabled = true
         return img
     }()
     
     private lazy var postImgView: UIImageView = {
-        let img = UIImageView()
-        //image: UIImage(named: "venom-7")
-        img.contentMode = .scaleAspectFill
-        img.isUserInteractionEnabled = true
+        let img = UIImageView().imageConfig(userInteraction: true)
+//        img.contentMode = .scaleAspectFill
+//        img.isUserInteractionEnabled = true
         return img
     }()
     
@@ -61,15 +60,16 @@ final class FeedCell: UICollectionViewCell {
     
     // MARK: - Label
     private let likesLabel: UILabel = {
-        return UILabel().labelConfig(labelText: "1 likes")
+        return UILabel().labelConfig(labelText: "1 likes",
+                                     fontName: .bold)
     }()
     private let captionLabel: UILabel = {
-        return UILabel().labelConfig(labelText: "Some test caption for now..")
+        return UILabel().labelConfig(labelText: "Some test caption for now..",
+                                     fontName: .bold)
     }()
     private let postTimeLabel: UILabel = {
         return UILabel().labelConfig(labelText: "2 days ago",
-                                     textColor: UIColor.lightGray,
-                                     fontName: .system)
+                                     textColor: UIColor.lightGray)
     }()
     
     
@@ -115,6 +115,7 @@ final class FeedCell: UICollectionViewCell {
     
     
     private func configureUI() {
+        
         // Auto_Layout
         // profileImgView
         self.addSubview(self.profileImgView)

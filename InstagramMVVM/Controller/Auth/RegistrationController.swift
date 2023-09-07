@@ -15,7 +15,7 @@ final class RegisterationController: UIViewController {
     
     private var profileImg: UIImage?
     
-    
+    weak var delegate: AuthenticationDelegate?
     
     
     
@@ -24,7 +24,7 @@ final class RegisterationController: UIViewController {
     // MARK: - Button
     private lazy var plusPhotoBtn: UIButton = {
         let btn = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "plus_photo"), tintColor: UIColor.white)
-        btn.addTarget(self, action: #selector(self.handlePhotoTap), for: .touchUpInside)
+            btn.addTarget(self, action: #selector(self.handlePhotoTap), for: .touchUpInside)
         return btn
     }()
     
@@ -43,6 +43,7 @@ final class RegisterationController: UIViewController {
             btn.addTarget(self, action: #selector(self.handleSignUp), for: .touchUpInside)
         return btn
     }()
+    
     
     
     
@@ -86,9 +87,6 @@ final class RegisterationController: UIViewController {
     
     
     
-    
-    
-    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +94,11 @@ final class RegisterationController: UIViewController {
         self.configureNotificationObservers()
     }
     
+    
+    
+    
+    
+    // MARK: - Helper_Functions
     private func configureUI() {
         // [Background_Color]
         self.configureGradientLayer()
@@ -131,6 +134,7 @@ final class RegisterationController: UIViewController {
     
     
     
+    
     // MARK: - Seletors
     @objc private func handleShowLogin() {
         self.navigationController?.popViewController(animated: true)
@@ -144,10 +148,10 @@ final class RegisterationController: UIViewController {
               let profileImg = self.profileImg else { return }
               
         let credentials = AuthCredentials(email: email, password: password, fullName: fullName,
-                                         userName: userName, profileImg: profileImg)
+                                          userName: userName, profileImg: profileImg)
         
         AuthService.register(withCredentials: credentials) {
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.authenticationComplete()
         }
     }
     
@@ -155,7 +159,7 @@ final class RegisterationController: UIViewController {
         let picker = UIImagePickerController()
             picker.delegate = self
             picker.allowsEditing = true
-        present(picker, animated: true)
+        self.present(picker, animated: true)
     }
     
     @objc private func textDidChange(sender: UITextField) {
@@ -183,7 +187,6 @@ extension RegisterationController: FormViewMocel {
 
 // MARK: - Picker_Delegate
 extension RegisterationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImg = info[.editedImage] as? UIImage else { return }
         

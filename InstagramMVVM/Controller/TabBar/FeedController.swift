@@ -39,7 +39,7 @@ final class FeedContoller: UICollectionViewController {
     // MARK: - Helper_Funtions
     private func configureUI() {
         // register_CollectionView
-        self.collectionView.register(FeedCell.self, forCellWithReuseIdentifier: Idenrifier.feed_Col_Cell)
+        self.collectionView.register(FeedCell.self, forCellWithReuseIdentifier: Identifier.feed_Col_Cell)
         
         self.navigationItem.title = "Feed"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "logout", style: .plain, target: self,
@@ -55,7 +55,9 @@ final class FeedContoller: UICollectionViewController {
     @objc private func handleLogout() {
         do {
             try Auth.auth().signOut()
-            let nav = UINavigationController(rootViewController: LoginController())
+            let conrtroller = LoginController()
+                conrtroller.delegate = self.tabBarController as? MainTabContoller
+            let nav = UINavigationController(rootViewController: conrtroller)
                 nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
 
@@ -82,7 +84,7 @@ extension FeedContoller {
     }
     // Cell_For_Row_At
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Idenrifier.feed_Col_Cell, for: indexPath) as! FeedCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.feed_Col_Cell, for: indexPath) as! FeedCell
         
         
         return cell
