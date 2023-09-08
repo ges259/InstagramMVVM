@@ -16,14 +16,17 @@ protocol AuthenticationViewModel {
 protocol FormViewMocel {
     func updateForm()
 }
+
+
+
+
+
 protocol AuthenticationDelegate: AnyObject {
     func authenticationComplete()
 }
 // profileHeader
 protocol ProfileHeaderDelegate: AnyObject {
     func header(_ profileHeader: ProfileHeader, didTapActionBtnFor user: User)
-//    func header(_ profileHeader: ProfileHeader, wantsToUnFollow uid: String)
-//    func headerWantsToShowEditProfile(_ profileHeader: ProfileHeader)
 }
 
 
@@ -35,8 +38,17 @@ protocol UploadPostControllerDelegate: AnyObject {
 
 
 
+//
+protocol FeedCellDelegate: AnyObject {
+    func cell(_ cell: FeedCell, wantsToShowCommentFor post: Post)
+    func cell(_ cell: FeedCell, didLike post: Post)
+}
 
 
+//
+protocol CommentInputAccessoryViewDelegate: AnyObject {
+    func inputView(_ inputView: CommentAccessoryView, wantsToUploadComment comment: String)
+}
 
 
 

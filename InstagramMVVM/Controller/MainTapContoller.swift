@@ -98,6 +98,7 @@ final class MainTabContoller: UITabBarController {
                 let controller = UploadPostController()
                     controller.selectedImg = selectedImg
                     controller.delegate = self
+                    controller.user = self.user
                 let nav = UINavigationController(rootViewController: controller)
                     nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: false)
@@ -139,7 +140,9 @@ final class MainTabContoller: UITabBarController {
     }
     
     private func fetchUser() {
-        UserService.fetchUser { user in
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        UserService.fetchUser(withUid: uid) { user in
             self.user = user
         }
     }
@@ -187,7 +190,14 @@ extension MainTabContoller: UITabBarControllerDelegate {
 
 extension MainTabContoller: UploadPostControllerDelegate {
     func controllerDidFinishUploadingPost(_ controller: UploadPostController) {
+        
         self.selectedIndex = 0
         controller.dismiss(animated: true)
+        
+        guard let feedNav = viewControllers?.first as? UINavigationController,
+              let feed = feedNav.viewControllers.first as? FeedContoller else { return }
+        
+        feed.handleRefresh()
+        
     }
 }

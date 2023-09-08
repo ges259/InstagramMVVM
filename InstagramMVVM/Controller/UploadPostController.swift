@@ -18,7 +18,7 @@ final class UploadPostController: UIViewController {
     }
     
     
-    
+    var user: User?
     
     
     // MARK: - ImageView
@@ -31,8 +31,7 @@ final class UploadPostController: UIViewController {
     // MARK: - TextView
     private lazy var captionTextView: InputTextView = {
         let tv = InputTextView()
-            tv.placeholderText = "Enter caption.."
-            tv.font = UIFont.systemFont(ofSize: 16)
+            tv.commentAccessory(currentController: .imageUploadController)
             tv.delegate = self
         return tv
     }()
@@ -106,12 +105,12 @@ final class UploadPostController: UIViewController {
     }
     @objc private func didDoneTap() {
         guard let img = self.selectedImg,
-              let caption = self.captionTextView.text else { return }
-        
+              let caption = self.captionTextView.text,
+              let user = self.user else { return }
         
         self.showLoader(true)
         
-        PostService.uploadPost(caption: caption, image: img) {
+        PostService.uploadPost(user: user, caption: caption, image: img) {
             self.showLoader(false)
             self.delegate?.controllerDidFinishUploadingPost(self)
         }

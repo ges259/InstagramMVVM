@@ -15,7 +15,6 @@ struct User {
     let userName: String
     let profileImgUrl: String
     
-    
     var stats: UserStats
     
     var isFollowed = false
@@ -29,7 +28,7 @@ struct User {
         self.userName = dictionary[DBString.userName] as? String ?? ""
         self.profileImgUrl = dictionary[DBString.profileImgUrl] as? String ?? ""
         
-        self.stats = UserStats(followers: 0, following: 0)
+        self.stats = UserStats(followers: 0, following: 0, post: 0)
     }
 }
 
@@ -37,5 +36,5 @@ struct User {
 struct UserStats {
     let followers: Int
     let following: Int
-//    let post: Int
+    let post: Int
 }

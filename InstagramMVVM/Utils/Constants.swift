@@ -15,4 +15,8 @@ struct Identifier {
     
     static let Search_Ta_cell: String = "SearchCell"
     
+    
+    static let comment_col_Cell: String = "commentCell"
+    
+    
 }

@@ -11,7 +11,7 @@ final class ProfileCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    
+    var viewModel: PostViewModel? { didSet { self.configure() } }
     
     
     
@@ -51,6 +51,12 @@ final class ProfileCell: UICollectionViewCell {
                                   bottom: self.bottomAnchor,
                                   leading: self.leadingAnchor,
                                   trailing: self.trailingAnchor)
+    }
+    
+    private func configure(){
+        guard let viewModel = self.viewModel else { return }
+        self.postImageView.sd_setImage(with: viewModel.imageURL)
+        
     }
     
     

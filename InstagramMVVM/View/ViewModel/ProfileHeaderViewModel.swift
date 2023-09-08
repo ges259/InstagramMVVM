@@ -10,6 +10,10 @@ import UIKit
 struct ProfileHeaderViewModel {
     let user: User
     
+    
+    
+    
+    
     var fullName: String { return self.user.fullName }
     
     var profileImgUrl: URL? {
@@ -19,7 +23,7 @@ struct ProfileHeaderViewModel {
     }
     
     var followBtnText: String {
-        if user.isCurrentUser {
+        if self.user.isCurrentUser {
             return "Edit Profile"
         } else {
             return self.user.isFollowed ? "Following" : "Follow"
@@ -27,6 +31,11 @@ struct ProfileHeaderViewModel {
     }
     
     
+
+    
+    
+    
+    // MARK: - Output
     var followBtnTitleColor: UIColor {
         return self.user.isCurrentUser ? UIColor.black : UIColor.white
     }
@@ -43,15 +52,25 @@ struct ProfileHeaderViewModel {
     
     var numFollowing: NSAttributedString {
         return self.labelAttributedTxt(int: self.user.stats.following,
-                                       string: "followers")
+                                       string: "following")
     }
     var numPosts: NSAttributedString {
-        return self.labelAttributedTxt(int: self.user.stats.following,
-                                       string: "followers")
+        return self.labelAttributedTxt(int: self.user.stats.post,
+                                       string: "post")
+    }
+
+    
+    
+    
+    
+    // MARK: - LifeCycle
+    init(user: User) {
+        self.user = user
     }
     
     
     
+    // MARK: - Helper_Functions
     private func labelAttributedTxt(int: Int, string: String) -> NSMutableAttributedString {
         return NSMutableAttributedString().attributedText(
             type1TextString: "\(int)\n",
@@ -62,15 +81,5 @@ struct ProfileHeaderViewModel {
             type2FontSize: 14,
             type2Foreground: UIColor.lightGray)
     }
-    
-    
-    // MARK: - LifeCycle
-    init(user: User) {
-        self.user = user
-    }
-    
-    
-    
-    
     
 }

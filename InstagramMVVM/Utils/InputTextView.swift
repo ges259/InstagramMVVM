@@ -19,12 +19,26 @@ final class InputTextView: UITextView {
     
     
     // MARK: - Layout
-    private let placeholderLabel: UILabel = {
+    let placeholderLabel: UILabel = {
         return UILabel().labelConfig(textColor: UIColor.lightGray,
-                                     fontSize: 16)
+                                     fontSize: 13)
     }()
     
     
+    
+    var placeHolderShouldCenter = true {
+        didSet {
+            if self.placeHolderShouldCenter {
+                self.placeholderLabel.anchor(top: self.topAnchor, paddingTop: 7,
+                                             leading: self.leadingAnchor, paddingLeading: 8,
+                                             trailing: self.trailingAnchor)
+                
+            } else {
+                self.placeholderLabel.anchor(top: self.topAnchor, paddingTop: 8,
+                                             leading: self.leadingAnchor, paddingLeading: 8)
+            }
+        }
+    }
     
     
     
@@ -46,11 +60,34 @@ final class InputTextView: UITextView {
     private func configureUI() {
         // placeholderLabel
         self.addSubview(self.placeholderLabel)
-        self.placeholderLabel.anchor(top: self.topAnchor, paddingTop: 6,
-                                     leading: self.leadingAnchor, paddingLeading: 8)
+
         
         // Notification
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleTextDidChanged), name: UITextView.textDidChangeNotification, object: nil)
+    }
+    
+    
+    enum InputTextViewEnum {
+        case commentAccessoryView
+        case imageUploadController
+    }
+    
+    func commentAccessory(currentController: InputTextViewEnum) {
+        
+        if currentController == .commentAccessoryView {
+            self.font = UIFont.systemFont(ofSize: 15)
+            self.isScrollEnabled = false
+
+            self.placeholderText = "Enter comment.."
+            self.placeHolderShouldCenter = true
+        } else {
+            self.placeholderText = "Enter caption.."
+            self.font = UIFont.systemFont(ofSize: 16)
+            self.placeHolderShouldCenter = false
+        }
+        
+        self.autocorrectionType = .no
+        self.autocapitalizationType = .none
     }
     
     

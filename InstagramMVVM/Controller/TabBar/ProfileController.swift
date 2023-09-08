@@ -12,7 +12,11 @@ final class ProfileController: UICollectionViewController {
     // MARK: - Properties
     private var user: User { didSet { self.collectionView.reloadData() } }
     
-    
+    private var posts = [Post]() {
+        didSet {
+            dump(posts)
+        }
+    }
     
     
     
@@ -25,6 +29,7 @@ final class ProfileController: UICollectionViewController {
         self.configureUI()
         self.checkIfUserFollowed()
         self.fetchUserStats()
+        self.fetchPosts()
     }
     init(user: User) {
         self.user = user
@@ -62,6 +67,7 @@ final class ProfileController: UICollectionViewController {
     // MARK: - API
     private func checkIfUserFollowed() {
         UserService.checkIfUserIsFollowed(uid: self.user.uid) { isFollowed in
+            print(isFollowed)
             self.user.isFollowed = isFollowed
             self.collectionView.reloadData()
         }
@@ -70,6 +76,13 @@ final class ProfileController: UICollectionViewController {
     private func fetchUserStats() {
         UserService.fetchUserStats(uid: self.user.uid) { stats in
             self.user.stats = stats
+            self.collectionView.reloadData()
+        }
+    }
+    
+    private func fetchPosts() {
+        PostService.fetchPostsCount(uid: user.uid) { posts in
+            self.posts = posts
             self.collectionView.reloadData()
         }
     }
@@ -125,11 +138,12 @@ extension ProfileController: ProfileHeaderDelegate {
 // MARK: - DataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return self.posts.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.profile_Col_Cell, for: indexPath) as! ProfileCell
         
+        cell.viewModel = PostViewModel(post: self.posts[indexPath.row])
         return cell
     }
     
@@ -151,7 +165,9 @@ extension ProfileController {
 // MARK: - Delegate
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let controller = FeedContoller(collectionViewLayout: UICollectionViewFlowLayout())
+            controller.post = self.posts[indexPath.row]
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 

@@ -417,6 +417,7 @@ extension UIImageView {
     func imageConfig(userInteraction: Bool = false) -> UIImageView {
         let img = UIImageView()
             img.contentMode = UIView.ContentMode.scaleAspectFill
+            img.clipsToBounds = true
         if userInteraction == true {
             img.isUserInteractionEnabled = true
         }

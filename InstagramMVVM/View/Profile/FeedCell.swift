@@ -10,24 +10,22 @@ import UIKit
 final class FeedCell: UICollectionViewCell {
     
     // MARK: - Properties
+    var viewModel: PostViewModel? {
+        didSet { self.configure()}
+    }
     
-    
-    
+    weak var delegate: FeedCellDelegate?
     
     
     
     // MARK: - Image_View
     private lazy var profileImgView: UIImageView = {
         let img = UIImageView(image: #imageLiteral(resourceName: "venom-7")).imageConfig(userInteraction: true)
-//        img.contentMode = .scaleAspectFill
-//        img.isUserInteractionEnabled = true
         return img
     }()
     
     private lazy var postImgView: UIImageView = {
         let img = UIImageView().imageConfig(userInteraction: true)
-//        img.contentMode = .scaleAspectFill
-//        img.isUserInteractionEnabled = true
         return img
     }()
     
@@ -42,13 +40,15 @@ final class FeedCell: UICollectionViewCell {
                           for: .touchUpInside)
         return btn
     }()
-    private lazy var likeBtn: UIButton = {
+    lazy var likeBtn: UIButton = {
         let btn = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "like_unselected"))
-        btn.addTarget(self, action: #selector(likeBtntap), for: .touchUpInside)
+            btn.addTarget(self, action: #selector(likeBtntap), for: .touchUpInside)
         return btn
     }()
     private lazy var commentBtn: UIButton = {
-        return UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "comment"))
+        let btn = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "comment"))
+        btn.addTarget(self, action: #selector(self.handleCommentTap), for: .touchUpInside)
+        return btn
     }()
     private lazy var shareBtn: UIButton = {
         return UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "send2"))
@@ -64,8 +64,7 @@ final class FeedCell: UICollectionViewCell {
                                      fontName: .bold)
     }()
     private let captionLabel: UILabel = {
-        return UILabel().labelConfig(labelText: "Some test caption for now..",
-                                     fontName: .bold)
+        return UILabel().labelConfig(fontName: .bold)
     }()
     private let postTimeLabel: UILabel = {
         return UILabel().labelConfig(labelText: "2 days ago",
@@ -107,6 +106,9 @@ final class FeedCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.configureUI()
+        
+        
+        
     }
     
     required init?(coder: NSCoder) {
@@ -152,7 +154,22 @@ final class FeedCell: UICollectionViewCell {
                                   leading: self.leadingAnchor, paddingLeading: 8)
     }
     
-    
+    private func configure() {
+        guard let viewModel = self.viewModel else { return }
+        
+        self.captionLabel.text = viewModel.caption
+        self.postImgView.sd_setImage(with: viewModel.imageURL)
+        
+        self.profileImgView.sd_setImage(with: viewModel.profileImageURL)
+        self.userNameBtn.setTitle(viewModel.userName, for: .normal)
+        
+        self.likesLabel.text = viewModel.likesLabelText
+        self.likeBtn.setImage(viewModel.likeBtnImg, for: .normal)
+        self.likeBtn.tintColor = viewModel.likeBtnTintColor
+        
+        
+        
+    }
     
     
     
@@ -164,10 +181,14 @@ final class FeedCell: UICollectionViewCell {
         print(#function)
     }
     @objc private func likeBtntap() {
-        print(#function)
+        guard let viewModel = self.viewModel else { return }
+        self.delegate?.cell(self, didLike: viewModel.post)
     }
     
-    
+    @objc private func handleCommentTap() {
+        guard let viewModel = self.viewModel else { return }
+        self.delegate?.cell(self, wantsToShowCommentFor: viewModel.post)
+    }
     
     
     

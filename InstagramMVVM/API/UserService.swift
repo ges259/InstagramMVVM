@@ -11,8 +11,7 @@ import Firebase
 struct UserService {
     
     // MARK: - Fetch_User
-    static func fetchUser(completion: @escaping (User) -> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+    static func fetchUser(withUid uid: String, completion: @escaping (User) -> Void) {
         USER_REF.child(uid).observeSingleEvent(of: .value) { snapshot in
             guard let dictionary: [String: Any] = snapshot.value as? [String : Any] else { return }
             
@@ -54,11 +53,8 @@ struct UserService {
     // MARK: - Follow / UnFollow
     static func follow(uid: String, completion: @escaping () -> Void) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
         FOLLOWERS_REF.child(currentUid).updateChildValues([uid: 1]) { error, ref in
-
             FOLLOWING_REF.child(uid).updateChildValues([currentUid: 1]) { error, ref in
-                
                 completion()
             }
         }
@@ -67,8 +63,6 @@ struct UserService {
     
     static func unFollow(uid: String, completion: @escaping () -> Void) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
-        
         FOLLOWERS_REF.child(currentUid).child(uid).removeValue { error, ref in
             FOLLOWING_REF.child(uid).child(currentUid).removeValue { error, ref in
                 completion()
@@ -95,12 +89,16 @@ struct UserService {
     static func fetchUserStats(uid: String, completion: @escaping (UserStats) -> Void) {
         
         FOLLOWERS_REF.child(uid).observe(.value) { snapshot in
-            let followers = Int(snapshot.childrenCount)
+            let following = Int(snapshot.childrenCount)
             
             FOLLOWING_REF.child(uid).observe(.value) { snapshot in
-                let following = Int(snapshot.childrenCount)
+                let follower = Int(snapshot.childrenCount)
                 
-                completion(UserStats(followers: followers, following: following))
+                USER_POSTS_REF.child(uid).observe(.value) { snapshot in
+                    let post = Int(snapshot.childrenCount)
+                    
+                    completion(UserStats(followers: follower, following: following, post: post))
+                }
             }
         }
     }
