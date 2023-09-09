@@ -67,10 +67,7 @@ final class InputTextView: UITextView {
     }
     
     
-    enum InputTextViewEnum {
-        case commentAccessoryView
-        case imageUploadController
-    }
+
     
     func commentAccessory(currentController: InputTextViewEnum) {
         

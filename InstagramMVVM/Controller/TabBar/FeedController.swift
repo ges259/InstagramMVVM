@@ -87,22 +87,10 @@ final class FeedContoller: UICollectionViewController {
     // MARK: - API
     private func fetchPosts() {
         guard self.post == nil else { return }
-        
-        PostService.fetchPosts { posts in
+        PostService.fetchPostAndcheckLiked { posts in
             self.posts.removeAll()
             self.posts = posts
-            self.checkIfUserLikedPosts()
             self.collectionView.refreshControl?.endRefreshing()
-        }
-    }
-    
-    private func checkIfUserLikedPosts() {
-        self.posts.forEach { post in
-            PostService.checkIfUserLikedPost(post: post) { didLike in
-                if let index = self.posts.firstIndex(where: { $0.postId == post.postId } ) {
-                    self.posts[index].didLike = didLike
-                }
-            }
         }
     }
 }
@@ -163,6 +151,9 @@ extension FeedContoller: FeedCellDelegate {
     
     func cell(_ cell: FeedCell, didLike post: Post) {
         
+        guard let tapBar = tabBarController as? MainTabContoller,
+              let currentUser = tapBar.user else { return }
+        
         cell.viewModel?.post.didLike.toggle()
         
         if post.didLike {
@@ -182,7 +173,19 @@ extension FeedContoller: FeedCellDelegate {
                 print("DEBUG: Like post did complete")
                 cell.likeBtn.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
                 cell.likeBtn.tintColor = .red
+                
+                NotificationService.uploadNotification(toUid: post.postOwnerUid,
+                                                       currentUser: currentUser,
+                                                       type: .like,
+                                                       post: post)
             }
         }
     }
+    func cell(_ cell: FeedCell, wantsToShowProfileFor uid: String) {
+        UserService.fetchUser(withUid: uid) { user in
+            let controller = ProfileController(user: user)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+
 }

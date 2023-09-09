@@ -40,8 +40,7 @@ final class UploadPostController: UIViewController {
     
     // MARK: - Label
     private let charactorCountLabel: UILabel = {
-        return UILabel().labelConfig(labelText: "0/100",
-                                     textColor: UIColor.lightGray,
+        return UILabel().labelConfig(textColor: UIColor.lightGray,
                                      fontSize: 14)
     }()
     

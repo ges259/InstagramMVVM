@@ -52,7 +52,7 @@ struct AuthService {
                                             DBString.userName: credentials.userName,
                                             DBString.profileImgUrl: imageUrl]
                 
-                USER_REF.child(uid).setValue(value) { error, ref in
+                USER_REF.child(DBString.userInfo).child(uid).setValue(value) { error, ref in
                     if let error = error {
                         print("DEBUG: Failed to register user \(error.localizedDescription)")
                         return

@@ -11,7 +11,7 @@ struct Post {
     var caption: String
     var likes: Int
     let postImageUrl: String
-    let postOwnerId: String
+    let postOwnerUid: String
     let timeStamp: Int
     let postId: String
     
@@ -28,7 +28,7 @@ struct Post {
         self.timeStamp = dictionary[DBString.timeStamp] as? Int ?? 0
         self.likes = dictionary[DBString.likes] as? Int ?? 0
         self.postImageUrl = dictionary[DBString.postImageUrl] as? String ?? ""
-        self.postOwnerId = dictionary[DBString.postOwnerUid] as? String ?? ""
+        self.postOwnerUid = dictionary[DBString.postOwnerUid] as? String ?? ""
         
         self.ownerImageURL = dictionary[DBString.ownerImageURL] as? String ?? ""
         self.ownerUserName = dictionary[DBString.ownerUserName] as? String ?? ""

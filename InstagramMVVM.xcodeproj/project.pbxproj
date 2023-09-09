@@ -52,6 +52,11 @@
 		5FA29C5D2AA7EBAF000C90CF /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA29C5C2AA7EBAF000C90CF /* ImageUploader.swift */; };
 		5FA29C5F2AA7EDAF000C90CF /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA29C5E2AA7EDAF000C90CF /* AuthService.swift */; };
 		5FA29C612AA7F3DE000C90CF /* DBString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA29C602AA7F3DE000C90CF /* DBString.swift */; };
+		5FCA64B82AABC12F00FF478F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA64B72AABC12F00FF478F /* NotificationCell.swift */; };
+		5FCA64BA2AABD0A800FF478F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA64B92AABD0A800FF478F /* Notification.swift */; };
+		5FCA64BC2AABD0EA00FF478F /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA64BB2AABD0EA00FF478F /* Enum.swift */; };
+		5FCA64BE2AABE41500FF478F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA64BD2AABE41500FF478F /* NotificationService.swift */; };
+		5FCA64C02AAC017000FF478F /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA64BF2AAC017000FF478F /* NotificationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +101,11 @@
 		5FA29C5C2AA7EBAF000C90CF /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		5FA29C5E2AA7EDAF000C90CF /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		5FA29C602AA7F3DE000C90CF /* DBString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBString.swift; sourceTree = "<group>"; };
+		5FCA64B72AABC12F00FF478F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		5FCA64B92AABD0A800FF478F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		5FCA64BB2AABD0EA00FF478F /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		5FCA64BD2AABE41500FF478F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		5FCA64BF2AAC017000FF478F /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +134,7 @@
 				5F78E1962AA81F1300B7F48A /* ProfileHeader.swift */,
 				5F302B0D2AAA90DC00CFEFFB /* CommentCell.swift */,
 				5F302B102AAA991B00CFEFFB /* CommentAccessoryView.swift */,
+				5FCA64B72AABC12F00FF478F /* NotificationCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -145,6 +156,7 @@
 				5F8376172AA924A2003FAD7E /* SearchTableViewModel.swift */,
 				5F302B092AAA3F1400CFEFFB /* PostViewModel.swift */,
 				5F8B44C32AAAD08F00591036 /* CommentViewModel.swift */,
+				5FCA64BF2AAC017000FF478F /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -198,6 +210,7 @@
 				5F83760E2AA8DB2D003FAD7E /* User.swift */,
 				5F302B072AAA2F1800CFEFFB /* Post.swift */,
 				5F8B44C12AAAC7F000591036 /* Comment.swift */,
+				5FCA64B92AABD0A800FF478F /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,6 +235,7 @@
 				5F83760C2AA8D9C1003FAD7E /* UserService.swift */,
 				5F9682A42AA995CC00BCEFC7 /* PostService.swift */,
 				5F8B44BF2AAAC0B100591036 /* CommentService.swift */,
+				5FCA64BD2AABE41500FF478F /* NotificationService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -234,6 +248,7 @@
 				5FA29C602AA7F3DE000C90CF /* DBString.swift */,
 				5F5AEA782AA76D9300E25835 /* Constants.swift */,
 				5F9682A22AA98EAF00BCEFC7 /* InputTextView.swift */,
+				5FCA64BB2AABD0EA00FF478F /* Enum.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -343,10 +358,12 @@
 				5FA29C5F2AA7EDAF000C90CF /* AuthService.swift in Sources */,
 				5F8376182AA924A2003FAD7E /* SearchTableViewModel.swift in Sources */,
 				5F5AEA6D2AA761FC00E25835 /* MainTapContoller.swift in Sources */,
+				5FCA64C02AAC017000FF478F /* NotificationViewModel.swift in Sources */,
 				5F302B0C2AAA8F9F00CFEFFB /* ConmmentController.swift in Sources */,
 				5F5AEA752AA7637D00E25835 /* NotificationsController.swift in Sources */,
 				5F8B44C02AAAC0B100591036 /* CommentService.swift in Sources */,
 				5F8B44C22AAAC7F000591036 /* Comment.swift in Sources */,
+				5FCA64BA2AABD0A800FF478F /* Notification.swift in Sources */,
 				5FA29C612AA7F3DE000C90CF /* DBString.swift in Sources */,
 				5F3AAA0A2AA798F000D06E0B /* LoginController.swift in Sources */,
 				5F5AEA6F2AA7633B00E25835 /* FeedController.swift in Sources */,
@@ -354,6 +371,7 @@
 				5F78E1972AA81F1300B7F48A /* ProfileHeader.swift in Sources */,
 				5F3AAA0F2AA7C09400D06E0B /* AuthenticationViewModel.swift in Sources */,
 				5F83760F2AA8DB2D003FAD7E /* User.swift in Sources */,
+				5FCA64BC2AABD0EA00FF478F /* Enum.swift in Sources */,
 				5F5AEA7B2AA7728000E25835 /* FeedCell.swift in Sources */,
 				5F8376112AA8E003003FAD7E /* ProfileHeaderViewModel.swift in Sources */,
 				5F5AEA542AA7613500E25835 /* AppDelegate.swift in Sources */,
@@ -361,6 +379,7 @@
 				5F8376162AA9055E003FAD7E /* SearchTableCell.swift in Sources */,
 				5F5AEA792AA76D9300E25835 /* Constants.swift in Sources */,
 				5F5AEA7D2AA7735400E25835 /* Extensions.swift in Sources */,
+				5FCA64BE2AABE41500FF478F /* NotificationService.swift in Sources */,
 				5F83760D2AA8D9C1003FAD7E /* UserService.swift in Sources */,
 				5F5AEA772AA7638B00E25835 /* ProfileController.swift in Sources */,
 				5F302B082AAA2F1800CFEFFB /* Post.swift in Sources */,
@@ -369,6 +388,7 @@
 				5F78E1952AA81EBF00B7F48A /* ProfileCell.swift in Sources */,
 				5F5AEA712AA7634600E25835 /* SearchContoller.swift in Sources */,
 				5F5AEA562AA7613500E25835 /* SceneDelegate.swift in Sources */,
+				5FCA64B82AABC12F00FF478F /* NotificationCell.swift in Sources */,
 				5F3AAA112AA7D06E00D06E0B /* Protocols.swift in Sources */,
 				5F302B0E2AAA90DC00CFEFFB /* CommentCell.swift in Sources */,
 			);

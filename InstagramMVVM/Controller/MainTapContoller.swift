@@ -44,13 +44,6 @@ final class MainTabContoller: UITabBarController {
         // Main_TabBar_Controller_Delegate
         self.delegate = self
         
-        // Feed_Controller
-        let feedLayout = UICollectionViewFlowLayout()
-        let feed = self.templateNavContoller(
-            unselectedImg: #imageLiteral(resourceName: "home_unselected"),
-            selectedImg: #imageLiteral(resourceName: "home_selected"),
-            rootController: FeedContoller(collectionViewLayout: feedLayout))
-        
         // Search_Controller
         let search = self.templateNavContoller(
             unselectedImg: #imageLiteral(resourceName: "search_unselected"),
@@ -70,11 +63,16 @@ final class MainTabContoller: UITabBarController {
             rootController: NotificationsController())
 
         // Profile_Controller
-        let profileController = ProfileController(user: user)
         let profile = self.templateNavContoller(
             unselectedImg: #imageLiteral(resourceName: "profile_unselected"),
             selectedImg: #imageLiteral(resourceName: "profile_selected"),
-            rootController: profileController)
+            rootController: ProfileController(user: user))
+        
+        // Feed_Controller
+        let feed = self.templateNavContoller(
+            unselectedImg: #imageLiteral(resourceName: "home_unselected"),
+            selectedImg: #imageLiteral(resourceName: "home_selected"),
+            rootController: FeedContoller(collectionViewLayout: UICollectionViewFlowLayout()))
 
         // TabBar에 추가
         self.viewControllers = [feed, search, imageSelector, notifications, profile]
@@ -140,7 +138,6 @@ final class MainTabContoller: UITabBarController {
     }
     
     private func fetchUser() {
-        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         UserService.fetchUser(withUid: uid) { user in
             self.user = user
@@ -198,6 +195,5 @@ extension MainTabContoller: UploadPostControllerDelegate {
               let feed = feedNav.viewControllers.first as? FeedContoller else { return }
         
         feed.handleRefresh()
-        
     }
 }

@@ -54,19 +54,16 @@ final class RegisterationController: UIViewController {
     }()
     
     private lazy var passwordTextField: UITextField = {
-        return UITextField().loginTextField(keyboardType: .emailAddress,
-                                            placeholerText: "Password",
+        return UITextField().loginTextField(placeholerText: "Password",
                                             isSecure: true)
     }()
     
     private lazy var fullNameTextField: UITextField = {
-        return UITextField().loginTextField(keyboardType: .emailAddress,
-                                            placeholerText: "FullName")
+        return UITextField().loginTextField(placeholerText: "FullName")
     }()
     
     private lazy var userNameTextField: UITextField = {
-        return UITextField().loginTextField(keyboardType: .emailAddress,
-                                            placeholerText: "Password")
+        return UITextField().loginTextField(placeholerText: "usreName")
     }()
     
     
@@ -90,6 +87,7 @@ final class RegisterationController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.configureUI()
         self.configureNotificationObservers()
     }
@@ -175,7 +173,7 @@ final class RegisterationController: UIViewController {
 
 
 // MARK: - Form_View_Mocel
-extension RegisterationController: FormViewMocel {
+extension RegisterationController: FormViewModel {
     func updateForm() {
         self.signUpBtn.isEnabled = self.viewModel.formIsValid
         self.signUpBtn.backgroundColor = self.viewModel.btnBackgroundColor
@@ -190,7 +188,7 @@ extension RegisterationController: UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImg = info[.editedImage] as? UIImage else { return }
         
-        self.plusPhotoBtn.layer.cornerRadius = plusPhotoBtn.frame.width / 2
+        self.plusPhotoBtn.layer.cornerRadius = self.plusPhotoBtn.frame.width / 2
         self.plusPhotoBtn.layer.masksToBounds = true
         self.plusPhotoBtn.layer.borderColor = UIColor.black.cgColor
         self.plusPhotoBtn.layer.borderWidth = 2

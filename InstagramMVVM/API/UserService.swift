@@ -12,16 +12,18 @@ struct UserService {
     
     // MARK: - Fetch_User
     static func fetchUser(withUid uid: String, completion: @escaping (User) -> Void) {
-        USER_REF.child(uid).observeSingleEvent(of: .value) { snapshot in
+        USER_REF.child(DBString.userInfo).child(uid).observeSingleEvent(of: .value) { snapshot in
+            
             guard let dictionary: [String: Any] = snapshot.value as? [String : Any] else { return }
             
             let user = User(dictionary: dictionary)
+            
             completion(user)
         }
     }
     
     static func fetchUsers(completion: @escaping ([User]) -> Void) {
-        USER_REF.observeSingleEvent(of: .value) { snapshot in
+        USER_REF.child(DBString.userInfo).observeSingleEvent(of: .value) { snapshot in
             
             guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
             
@@ -94,7 +96,7 @@ struct UserService {
             FOLLOWING_REF.child(uid).observe(.value) { snapshot in
                 let follower = Int(snapshot.childrenCount)
                 
-                USER_POSTS_REF.child(uid).observe(.value) { snapshot in
+                POSTS_REF.child(DBString.postUserName).child(uid).observe(.value) { snapshot in
                     let post = Int(snapshot.childrenCount)
                     
                     completion(UserStats(followers: follower, following: following, post: post))

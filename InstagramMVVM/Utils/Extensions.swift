@@ -69,7 +69,7 @@ extension UIButton {
     func buttonConfig(title: String = "",
                       titleColor: UIColor = UIColor.black,
                       
-                      fontName: FontStyle = FontStyle.bold,
+                      fontName: FontStyleEnum = FontStyleEnum.bold,
                       fontSize: CGFloat = 13,
                       
                       borderColor: UIColor? = nil,
@@ -92,17 +92,17 @@ extension UIButton {
     
     func loginButton(title: String) -> UIButton {
         let btn = UIButton(type: .system)
-        // [Title]
-        btn.setTitle(title, for: .normal)
-        btn.setTitleColor(UIColor.white, for: .normal)
-        // [Font]
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        // [Layout]
-        btn.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        btn.clipsToBounds = true
-        btn.layer.cornerRadius = 5
-        btn.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        btn.isEnabled = false
+            // [Title]
+            btn.setTitle(title, for: .normal)
+            btn.setTitleColor(UIColor.white, for: .normal)
+            // [Font]
+            btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+            // [Layout]
+            btn.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+            btn.clipsToBounds = true
+            btn.layer.cornerRadius = 5
+            btn.heightAnchor.constraint(equalToConstant: 45).isActive = true
+            btn.isEnabled = false
         
         return btn
     }
@@ -232,10 +232,7 @@ extension UIView {
 
 
 
-enum FontStyle {
-    case system
-    case bold
-}
+
 
 
 
@@ -243,7 +240,7 @@ enum FontStyle {
 extension UILabel {
     func labelConfig(labelText: String = "",
                      textColor: UIColor = UIColor.black,
-                     fontName: FontStyle = .system,
+                     fontName: FontStyleEnum = .system,
                      fontSize: CGFloat = 12)
     -> UILabel {
         let lbl = UILabel()
@@ -304,7 +301,7 @@ extension UIStackView {
 
 // MARK: - UITextField
 extension UITextField {
-    func loginTextField(keyboardType: UIKeyboardType,
+    func loginTextField(keyboardType: UIKeyboardType = .default,
                         placeholerText: String,
                         isSecure: Bool = false) -> UITextField{
         let tf = UITextField()
@@ -354,25 +351,26 @@ extension UITextField {
 extension NSMutableAttributedString {
     
     func attributedText(type1TextString: String,
-                        type1FontName: FontStyle = FontStyle.system,
-                        type1FontSize: CGFloat = 16,
                         type1Foreground: UIColor = UIColor(white: 1, alpha: 0.7),
+                        type1FontName: FontStyleEnum = FontStyleEnum.system,
+                        type1FontSize: CGFloat = 16,
                         
                         type2TextString: String,
-                        type2FontName: FontStyle = FontStyle.bold,
-                        type2FontSize: CGFloat = 16,
                         type2Foreground: UIColor = UIColor(white: 1, alpha: 0.7),
+                        type2FontName: FontStyleEnum = FontStyleEnum.bold,
+                        type2FontSize: CGFloat = 16,
                         
                         type3TextString: String? = nil,
-                        type3FontName: FontStyle? = nil,
-                        type3FontSize: CGFloat? = nil,
-                        type3Foreground: UIColor? = nil
+                        type3Foreground: UIColor? = nil,
+                        type3FontName: FontStyleEnum? = nil,
+                        type3FontSize: CGFloat? = nil
+                        
     ) -> NSMutableAttributedString {
         
         // UIFont 설정
-        let type1Font: UIFont = type1FontName == FontStyle.system ? UIFont.systemFont(ofSize: type1FontSize) : UIFont.boldSystemFont(ofSize: type1FontSize)
+        let type1Font: UIFont = type1FontName == FontStyleEnum.system ? UIFont.systemFont(ofSize: type1FontSize) : UIFont.boldSystemFont(ofSize: type1FontSize)
         
-        let type2Font: UIFont = type2FontName == FontStyle.system ? UIFont.systemFont(ofSize: type2FontSize) : UIFont.boldSystemFont(ofSize: type2FontSize)
+        let type2Font: UIFont = type2FontName == FontStyleEnum.system ? UIFont.systemFont(ofSize: type2FontSize) : UIFont.boldSystemFont(ofSize: type2FontSize)
         
         // Mutable_Attributed_String 설정
         let attributedTitle = NSMutableAttributedString(
@@ -393,7 +391,7 @@ extension NSMutableAttributedString {
            let type3Foreground = type3Foreground
         {
             // type 3 - font 설정
-            let type3Font: UIFont = type3FontName == FontStyle.system ? UIFont.systemFont(ofSize: type1FontSize) : UIFont.boldSystemFont(ofSize: type3FontSize)
+            let type3Font: UIFont = type3FontName == FontStyleEnum.system ? UIFont.systemFont(ofSize: type1FontSize) : UIFont.boldSystemFont(ofSize: type3FontSize)
             
             attributedTitle.append(NSAttributedString(
                 string: type3TextString,
@@ -418,6 +416,7 @@ extension UIImageView {
         let img = UIImageView()
             img.contentMode = UIView.ContentMode.scaleAspectFill
             img.clipsToBounds = true
+            img.backgroundColor = .lightGray
         if userInteraction == true {
             img.isUserInteractionEnabled = true
         }

@@ -48,7 +48,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private lazy var editProfileBtn: UIButton = {
         let btn = UIButton().buttonConfig(title: "Loading",
-                                          fontName: FontStyle.bold,
+                                          fontName: FontStyleEnum.bold,
                                           fontSize: 14,
                                           borderColor: UIColor.lightGray)
             btn.addTarget(self, action: #selector(self.handleEditPrifileBtnTap), for: .touchUpInside)

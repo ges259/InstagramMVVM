@@ -13,7 +13,7 @@ protocol AuthenticationViewModel {
     var btnBackgroundColor: UIColor { get }
     var btnTitleColor: UIColor { get }
 }
-protocol FormViewMocel {
+protocol FormViewModel {
     func updateForm()
 }
 
@@ -21,6 +21,8 @@ protocol FormViewMocel {
 
 
 
+
+// [Delegate]
 protocol AuthenticationDelegate: AnyObject {
     func authenticationComplete()
 }
@@ -42,6 +44,7 @@ protocol UploadPostControllerDelegate: AnyObject {
 protocol FeedCellDelegate: AnyObject {
     func cell(_ cell: FeedCell, wantsToShowCommentFor post: Post)
     func cell(_ cell: FeedCell, didLike post: Post)
+    func cell(_ cell: FeedCell, wantsToShowProfileFor uid: String)
 }
 
 
@@ -52,7 +55,12 @@ protocol CommentInputAccessoryViewDelegate: AnyObject {
 
 
 
-
+// Notification
+protocol NotificationCellDelegate: AnyObject {
+    func cell(_ cell: NotificationCell, wantsToFollow uid: String)
+    func cell(_ cell: NotificationCell, wantsToUnFollow uid: String)
+    func cell(_ cell: NotificationCell, wantsToViewPost postId: String)
+}
 
 
 

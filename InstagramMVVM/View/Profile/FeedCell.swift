@@ -21,6 +21,8 @@ final class FeedCell: UICollectionViewCell {
     // MARK: - Image_View
     private lazy var profileImgView: UIImageView = {
         let img = UIImageView(image: #imageLiteral(resourceName: "venom-7")).imageConfig(userInteraction: true)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleShowProfile))
+            img.addGestureRecognizer(tap)
         return img
     }()
     
@@ -36,7 +38,7 @@ final class FeedCell: UICollectionViewCell {
     private lazy var userNameBtn: UIButton = {
         let btn = UIButton().buttonConfig(title: "venom",
                                           titleColor: UIColor.black)
-            btn.addTarget(self, action: #selector(self.UserNameTap),
+            btn.addTarget(self, action: #selector(self.handleShowProfile),
                           for: .touchUpInside)
         return btn
     }()
@@ -47,7 +49,7 @@ final class FeedCell: UICollectionViewCell {
     }()
     private lazy var commentBtn: UIButton = {
         let btn = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "comment"))
-        btn.addTarget(self, action: #selector(self.handleCommentTap), for: .touchUpInside)
+            btn.addTarget(self, action: #selector(self.handleCommentTap), for: .touchUpInside)
         return btn
     }()
     private lazy var shareBtn: UIButton = {
@@ -177,8 +179,9 @@ final class FeedCell: UICollectionViewCell {
     
     
     // MARK: - Selectors
-    @objc private func UserNameTap() {
-        print(#function)
+    @objc private func handleShowProfile() {
+        guard let viewModel = self.viewModel else { return }
+        self.delegate?.cell(self, wantsToShowProfileFor: viewModel.post.postOwnerUid)
     }
     @objc private func likeBtntap() {
         guard let viewModel = self.viewModel else { return }

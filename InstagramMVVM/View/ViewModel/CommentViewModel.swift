@@ -23,12 +23,13 @@ struct CommentViewModel {
     var commentLabelText: NSAttributedString {
         return NSMutableAttributedString().attributedText(
             type1TextString: "\(self.comment.userName)  ",
-            type1FontName: .bold,
             type1Foreground: .black,
+            type1FontName: .bold,
+            
             type2TextString: self.comment.commnetText,
+            type2Foreground: .black,
             type2FontName: .system,
-            type2FontSize: 14,
-            type2Foreground: .black)
+            type2FontSize: 14)
     }
     
     func size(width: CGFloat) -> CGSize {

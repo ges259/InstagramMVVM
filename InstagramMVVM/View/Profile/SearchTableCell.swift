@@ -18,7 +18,7 @@ final class SearchTableCell: UITableViewCell {
     
     // MARK: - Image_View
     private let profileImgView: UIImageView = {
-        return UIImageView()
+        return UIImageView().imageConfig()
     }()
     
     
@@ -60,6 +60,7 @@ final class SearchTableCell: UITableViewCell {
     
     // MARK: - Helper_Functions
     private func configureUI() {
+        self.selectionStyle = .none
         // Auto_Layout
         // profileImgView
         self.addSubview(self.profileImgView)

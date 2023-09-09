@@ -171,7 +171,7 @@ final class LoginController: UIViewController {
 
 
 // MARK: - FormViewMocel
-extension LoginController: FormViewMocel {
+extension LoginController: FormViewModel {
     func updateForm() {
         self.loginBtn.isEnabled = self.viewModel.formIsValid
         self.loginBtn.backgroundColor = self.viewModel.btnBackgroundColor

@@ -12,11 +12,7 @@ final class ProfileController: UICollectionViewController {
     // MARK: - Properties
     private var user: User { didSet { self.collectionView.reloadData() } }
     
-    private var posts = [Post]() {
-        didSet {
-            dump(posts)
-        }
-    }
+    private var posts = [Post]()
     
     
     
@@ -45,7 +41,8 @@ final class ProfileController: UICollectionViewController {
     private func configureUI() {
         self.collectionView.backgroundColor = UIColor.white
         self.navigationItem.title = self.user.userName
-        self.collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: Identifier.profile_Col_Cell)
+        self.collectionView.register(ProfileCell.self,
+                                     forCellWithReuseIdentifier: Identifier.profile_Col_Cell)
         self.collectionView.register(ProfileHeader.self,
                                      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                      withReuseIdentifier: Identifier.profile_Header)
@@ -67,7 +64,6 @@ final class ProfileController: UICollectionViewController {
     // MARK: - API
     private func checkIfUserFollowed() {
         UserService.checkIfUserIsFollowed(uid: self.user.uid) { isFollowed in
-            print(isFollowed)
             self.user.isFollowed = isFollowed
             self.collectionView.reloadData()
         }
@@ -97,9 +93,14 @@ final class ProfileController: UICollectionViewController {
     // edit_Profile / follow / unfollow 버튼
 extension ProfileController: ProfileHeaderDelegate {
     func header(_ profileHeader: ProfileHeader, didTapActionBtnFor user: User) {
+        guard let tapBar = tabBarController as? MainTabContoller,
+              let currentUser = tapBar.user else { return }
+        
+        
         // edit_Profile 버튼
         if user.isCurrentUser {
             print("DEBUG: Show edit profile here..")
+            
             
         // following 상태 버튼 (unfollow)
         } else if user.isFollowed {
@@ -113,6 +114,11 @@ extension ProfileController: ProfileHeaderDelegate {
             UserService.follow(uid: user.uid) {
                 self.user.isFollowed = true
                 self.collectionView.reloadData()
+                
+                // Notification
+                NotificationService.uploadNotification(toUid: self.user.uid,
+                                                       currentUser: currentUser,
+                                                       type: .follow)
             }
         }
     }

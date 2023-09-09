@@ -19,4 +19,6 @@ struct Identifier {
     static let comment_col_Cell: String = "commentCell"
     
     
+    static let notification_Ta_Cell: String = "notificationCell"
+    
 }

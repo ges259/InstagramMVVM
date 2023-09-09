@@ -74,12 +74,13 @@ struct ProfileHeaderViewModel {
     private func labelAttributedTxt(int: Int, string: String) -> NSMutableAttributedString {
         return NSMutableAttributedString().attributedText(
             type1TextString: "\(int)\n",
+            type1Foreground: UIColor.black,
             type1FontName: .bold,
             type1FontSize: 14,
-            type1Foreground: UIColor.black,
+            
             type2TextString: string,
-            type2FontSize: 14,
-            type2Foreground: UIColor.lightGray)
+            type2Foreground: UIColor.lightGray,
+            type2FontSize: 14)
     }
     
 }

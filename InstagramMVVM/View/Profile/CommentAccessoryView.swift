@@ -25,7 +25,7 @@ final class CommentAccessoryView: UIView {
     
     private lazy var postBtn: UIButton = {
         let btn = UIButton().buttonConfig(title: "Post",
-                                          fontName: FontStyle.bold,
+                                          fontName: FontStyleEnum.bold,
                                           fontSize: 14)
             btn.addTarget(self, action: #selector(self.handlePostTap), for: .touchUpInside)
         return btn

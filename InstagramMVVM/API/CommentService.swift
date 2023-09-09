@@ -18,7 +18,7 @@ struct CommentService {
                                     DBString.userName: user.userName,
                                     DBString.profileImgUrl: user.profileImgUrl]
         
-        let commentId = POSTS_REF.child(postId).child(DBString.commet).childByAutoId()
+        let commentId = POSTS_REF.child(DBString.postFeed).child(postId).child(DBString.commet).childByAutoId()
         
         commentId.setValue(value) { error, ref in
             if let error = error {
@@ -33,7 +33,7 @@ struct CommentService {
     
     static func fetchComment(forPost postId: String, completion: @escaping ([Comment]) -> Void) {
         
-        POSTS_REF.child(postId).child(DBString.commet).observe(.value) { snapshot in
+        POSTS_REF.child(DBString.postFeed).child(postId).child(DBString.commet).observe(.value) { snapshot in
             
             guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
             

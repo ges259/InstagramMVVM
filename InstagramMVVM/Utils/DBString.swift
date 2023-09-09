@@ -15,7 +15,7 @@ let FOLLOWERS_REF: DatabaseReference = DB_REF.child("following")
 let FOLLOWING_REF: DatabaseReference = DB_REF.child("followers")
 let POSTS_REF: DatabaseReference = DB_REF.child("posts")
 let USER_POSTS_REF: DatabaseReference = DB_REF.child("user-posts")
-//let COMMENT_REF: DatabaseReference = DB_REF.child("comment")
+let NOTIFICATIONS_REF: DatabaseReference = DB_REF.child("notifications")
 
 
 struct DBString {
@@ -25,6 +25,8 @@ struct DBString {
     static let fullName: String = "fullName"
     static let userName: String = "userName"
     static let profileImgUrl: String = "profileImgUrl"
+    
+    static let userInfo: String = "user-info"
     
     // [Post]
     static let caption: String = "caption"
@@ -36,11 +38,21 @@ struct DBString {
     static let ownerImageURL: String = "ownerImageURL"
     static let ownerUserName: String = "ownerUserName"
     
+    
+    static let postUserName: String = "post-userName"
+    static let postFeed: String = "post-feed"
+    
     // [Comment]
     static let commet: String = "comment"
     
     // [Like]
-    static let postLikes: String = "post-likes"
-    static let userLikes: String = "user-likes"
+    static let postLikesUsers: String = "post-like-users"
+    static let userLikesPosts: String = "user-like-posts"
+    
+    
+    // [Notification]
+    static let type: String = "type"
+    static let notificationId: String = "notificationId"
+    static let userNotifiations: String = "user-notifications"
 }
 
