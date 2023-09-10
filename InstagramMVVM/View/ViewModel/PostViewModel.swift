@@ -30,8 +30,13 @@ struct PostViewModel {
         return self.post.didLike ? UIColor.red : UIColor.black
     }
     
-    var  likeBtnImg: UIImage {
+    var likeBtnImg: UIImage {
         return self.post.didLike ? #imageLiteral(resourceName: "like_selected") : #imageLiteral(resourceName: "like_unselected")
+    }
+    
+    var postTime: String? {
+        return Date.dateString(dateDouble: self.post.timeStamp,
+                               unitStyle: .full)
     }
     
     

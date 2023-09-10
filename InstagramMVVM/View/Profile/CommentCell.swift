@@ -11,17 +11,14 @@ final class CommentCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var viewModel: CommentViewModel? {
-        didSet { self.configure() }
-    }
+    var viewModel: CommentViewModel? { didSet { self.configure() } }
     
     
     
     
     // MARK: - Layout
-    private let profileImgView: UIImageView = {
-        return UIImageView().imageConfig()
-    }()
+    private let profileImgView: UIImageView = UIImageView().imageConfig()
+        
     
     
     
@@ -62,11 +59,12 @@ final class CommentCell: UICollectionViewCell {
                                  trailing: self.trailingAnchor, paddingtrailing: 8,
                                  centerY: self)
     }
+    
+    
+    
     private func configure() {
         guard let viewModel = self.viewModel else { return }
         self.profileImgView.sd_setImage(with: viewModel.profileImageURL)
         self.commentLabel.attributedText = viewModel.commentLabelText
     }
-    
-    
 }

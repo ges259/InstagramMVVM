@@ -12,15 +12,9 @@ struct ProfileHeaderViewModel {
     
     
     
-    
-    
     var fullName: String { return self.user.fullName }
     
-    var profileImgUrl: URL? {
-        
-        return URL(string: self.user.profileImgUrl)
-        
-    }
+    var profileImgUrl: URL? { return URL(string: self.user.profileImgUrl) }
     
     var followBtnText: String {
         if self.user.isCurrentUser {

@@ -64,3 +64,7 @@ protocol NotificationCellDelegate: AnyObject {
 
 
 
+// ResetPasswordController
+protocol ResetPasswordControllerDelegate: AnyObject {
+    func controllerDidSendResetPasswordLink(_ controller: ResetPasswordController)
+}

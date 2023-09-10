@@ -19,86 +19,47 @@ final class FeedCell: UICollectionViewCell {
     
     
     // MARK: - Image_View
-    private lazy var profileImgView: UIImageView = {
-        let img = UIImageView(image: #imageLiteral(resourceName: "venom-7")).imageConfig(userInteraction: true)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleShowProfile))
-            img.addGestureRecognizer(tap)
-        return img
-    }()
+    private lazy var profileImgView: UIImageView = UIImageView().imageConfig(userInteraction: true)
     
-    private lazy var postImgView: UIImageView = {
-        let img = UIImageView().imageConfig(userInteraction: true)
-        return img
-    }()
-    
-    
+    private lazy var postImgView: UIImageView = UIImageView().imageConfig(userInteraction: true)
+        
     
     
     // MARK: - Button
-    private lazy var userNameBtn: UIButton = {
-        let btn = UIButton().buttonConfig(title: "venom",
-                                          titleColor: UIColor.black)
-            btn.addTarget(self, action: #selector(self.handleShowProfile),
-                          for: .touchUpInside)
-        return btn
-    }()
-    lazy var likeBtn: UIButton = {
-        let btn = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "like_unselected"))
-            btn.addTarget(self, action: #selector(likeBtntap), for: .touchUpInside)
-        return btn
-    }()
-    private lazy var commentBtn: UIButton = {
-        let btn = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "comment"))
-            btn.addTarget(self, action: #selector(self.handleCommentTap), for: .touchUpInside)
-        return btn
-    }()
-    private lazy var shareBtn: UIButton = {
-        return UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "send2"))
-    }()
+    private lazy var userNameBtn: UIButton = UIButton().buttonConfig(title: "venom",
+                                                                     titleColor: UIColor.black)
+        
+    lazy var likeBtn: UIButton = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "like_unselected"))
+        
+    private lazy var commentBtn: UIButton = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "comment"))
+            
+    private lazy var shareBtn: UIButton = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "send2"))
     
     
     
     
     
     // MARK: - Label
-    private let likesLabel: UILabel = {
-        return UILabel().labelConfig(labelText: "1 likes",
-                                     fontName: .bold)
-    }()
-    private let captionLabel: UILabel = {
-        return UILabel().labelConfig(fontName: .bold)
-    }()
-    private let postTimeLabel: UILabel = {
-        return UILabel().labelConfig(labelText: "2 days ago",
-                                     textColor: UIColor.lightGray)
-    }()
+    private let likesLabel: UILabel = UILabel().labelConfig(labelText: "1 likes",
+                                                            fontName: .bold)
+    
+    private let captionLabel: UILabel = UILabel().labelConfig(fontName: .bold)
+    
+    private let postTimeLabel: UILabel = UILabel().labelConfig(labelText: "2 days ago",
+                                                               textColor: UIColor.lightGray)
     
     
     
     
     
     // MARK: - Stack_View
-    private lazy var stackView: UIStackView = {
-        return UIStackView().stackView(arrangedSubviews: [self.likeBtn,
-                                                          self.commentBtn,
-                                                          self.shareBtn],
-                                       axis: .horizontal,
-                                       alignment: .center,
-                                       distribution: .fillEqually)
-    }()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    private lazy var stackView: UIStackView = UIStackView().stackView(arrangedSubviews:
+                                                                        [self.likeBtn,
+                                                                         self.commentBtn,
+                                                                         self.shareBtn],
+                                                                      axis: .horizontal,
+                                                                      alignment: .center,
+                                                                      distribution: .fillEqually)
     
     
     
@@ -108,18 +69,14 @@ final class FeedCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.configureUI()
-        
-        
-        
+        self.addSelectors()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
     private func configureUI() {
-        
         // Auto_Layout
         // profileImgView
         self.addSubview(self.profileImgView)
@@ -162,15 +119,22 @@ final class FeedCell: UICollectionViewCell {
         self.captionLabel.text = viewModel.caption
         self.postImgView.sd_setImage(with: viewModel.imageURL)
         
+        self.postTimeLabel.text = viewModel.postTime
         self.profileImgView.sd_setImage(with: viewModel.profileImageURL)
         self.userNameBtn.setTitle(viewModel.userName, for: .normal)
         
         self.likesLabel.text = viewModel.likesLabelText
         self.likeBtn.setImage(viewModel.likeBtnImg, for: .normal)
         self.likeBtn.tintColor = viewModel.likeBtnTintColor
+    }
+    
+    private func addSelectors() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleShowProfile))
+        self.profileImgView.addGestureRecognizer(tap)
         
-        
-        
+        self.commentBtn.addTarget(self, action: #selector(self.handleCommentTap), for: .touchUpInside)
+        self.userNameBtn.addTarget(self, action: #selector(self.handleShowProfile), for: .touchUpInside)
+        self.likeBtn.addTarget(self, action: #selector(likeBtntap), for: .touchUpInside)
     }
     
     
@@ -192,11 +156,4 @@ final class FeedCell: UICollectionViewCell {
         guard let viewModel = self.viewModel else { return }
         self.delegate?.cell(self, wantsToShowCommentFor: viewModel.post)
     }
-    
-    
-    
-    
-    
-    
-
 }

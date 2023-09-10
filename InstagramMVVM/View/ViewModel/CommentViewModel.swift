@@ -29,8 +29,20 @@ struct CommentViewModel {
             type2TextString: self.comment.commnetText,
             type2Foreground: .black,
             type2FontName: .system,
-            type2FontSize: 14)
+            type2FontSize: 14,
+            
+            type3TextString: "   \(self.commentTime ?? "")",
+            type3Foreground: UIColor.lightGray,
+            type3FontName: .system,
+            type3FontSize: 12)
     }
+    var commentTime: String? {
+        return Date.dateString(dateDouble: self.comment.timeStamp,
+                               unitStyle: .abbreviated)
+    }
+    
+    
+    
     
     func size(width: CGFloat) -> CGSize {
         let lbl = UILabel()

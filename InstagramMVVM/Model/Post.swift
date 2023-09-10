@@ -12,7 +12,7 @@ struct Post {
     var likes: Int
     let postImageUrl: String
     let postOwnerUid: String
-    let timeStamp: Int
+    let timeStamp: Double
     let postId: String
     
     let ownerImageURL: String
@@ -25,12 +25,18 @@ struct Post {
         self.postId = postId
         
         self.caption = dictionary[DBString.caption] as? String ?? ""
-        self.timeStamp = dictionary[DBString.timeStamp] as? Int ?? 0
+        self.timeStamp = dictionary[DBString.timeStamp] as? Double ?? 0
         self.likes = dictionary[DBString.likes] as? Int ?? 0
         self.postImageUrl = dictionary[DBString.postImageUrl] as? String ?? ""
         self.postOwnerUid = dictionary[DBString.postOwnerUid] as? String ?? ""
         
         self.ownerImageURL = dictionary[DBString.ownerImageURL] as? String ?? ""
         self.ownerUserName = dictionary[DBString.ownerUserName] as? String ?? ""
+        
+//        if let timeStamp = dictionary[DBString.timeStamp] as? Double {
+//            self.timeStamp = Date(timeIntervalSince1970: timeStamp)
+//        } else {
+//            self.timeStamp = nil
+//        }
     }
 }

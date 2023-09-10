@@ -20,46 +20,34 @@ final class LoginController: UIViewController {
     
     
     // MARK: - Image_View
-    private let iconImg: UIImageView = {
-        return UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
-    }()
+    private let iconImg: UIImageView = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
     
     
     
     
     // MARK: - TextField
-    private lazy var emailTextField: UITextField = {
-        return UITextField().loginTextField(keyboardType: .emailAddress,
-                                              placeholerText: "Email")
-    }()
+    private lazy var emailTextField: UITextField = UITextField().loginTextField(keyboardType: .emailAddress,
+                                                                                placeholerText: "Email")
     
-    private lazy var passwordTextField: UITextField = {
-        return UITextField().loginTextField(keyboardType: .emailAddress,
-                                              placeholerText: "Password",
-                                              isSecure: true)
-    }()
+    private lazy var passwordTextField: UITextField = UITextField().loginTextField(keyboardType: .emailAddress,
+                                                                                   placeholerText: "Password",
+                                                                                   isSecure: true)
     
     
     
     
     // MARK: - StackView
-    private lazy var stackView: UIStackView = {
-        return UIStackView().stackView(arrangedSubviews: [self.emailTextField,
-                                                          self.passwordTextField,
-                                                          self.loginBtn],
-                                       axis: .vertical,
-                                       spacing: 13)
-    }()
+    private lazy var stackView: UIStackView = UIStackView().stackView(arrangedSubviews: [self.emailTextField,
+                                                                                         self.passwordTextField,
+                                                                                         self.loginBtn],
+                                                                      axis: .vertical,
+                                                                      spacing: 13)
     
     
     
     
     // MARK: - Button
-    private lazy var loginBtn: UIButton = {
-        let btn = UIButton().loginButton(title: "Log In")
-            btn.addTarget(self, action: #selector(self.handleLogin), for: .touchUpInside)
-        return btn
-    }()
+    private lazy var loginBtn: UIButton = UIButton().loginButton(title: "Log In")
     
     private lazy var forgotPasswordBtn: UIButton = {
         let btn = UIButton()
@@ -76,7 +64,6 @@ final class LoginController: UIViewController {
             btn.setAttributedTitle(NSMutableAttributedString().attributedText(
                 type1TextString: "Don't Have an account?   ",
                 type2TextString: "Sign Up"), for: .normal)
-            btn.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return btn
     }()
     
@@ -87,8 +74,9 @@ final class LoginController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.configureUI()
-        self.configureNotificationObservers()
+        self.addSelectors()
     }
     
     
@@ -127,9 +115,15 @@ final class LoginController: UIViewController {
     
     
     
-    private func configureNotificationObservers() {
+    private func addSelectors() {
         self.emailTextField.addTarget(self, action: #selector(self.textDidChange), for: .editingChanged)
         self.passwordTextField.addTarget(self, action: #selector(self.textDidChange), for: .editingChanged)
+        
+        self.loginBtn.addTarget(self, action: #selector(self.handleLogin), for: .touchUpInside)
+        
+        self.dontHaveAcccoutBtn.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
+        
+        self.forgotPasswordBtn.addTarget(self, action: #selector(self.handleShowResetPassword), for: .touchUpInside)
     }
     
     
@@ -157,6 +151,13 @@ final class LoginController: UIViewController {
         self.updateForm()
     }
     
+    @objc private func handleShowResetPassword() {
+        let controller = ResetPasswordController(email: self.emailTextField.text,
+                                                 viewModel: ResetPasswordViewModel())
+            controller.delegate = self
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     @objc private func handleLogin() {
         guard let email = self.emailTextField.text,
               let password = self.passwordTextField.text else { return }
@@ -170,11 +171,23 @@ final class LoginController: UIViewController {
 
 
 
-// MARK: - FormViewMocel
+// MARK: - FormViewModel
 extension LoginController: FormViewModel {
     func updateForm() {
         self.loginBtn.isEnabled = self.viewModel.formIsValid
         self.loginBtn.backgroundColor = self.viewModel.btnBackgroundColor
         self.loginBtn.setTitleColor(self.viewModel.btnTitleColor, for: .normal)
+    }
+}
+
+
+
+
+// MARK: - ResetPasswordControllerDelegate
+extension LoginController: ResetPasswordControllerDelegate {
+    func controllerDidSendResetPasswordLink(_ controller: ResetPasswordController) {
+        self.navigationController?.popViewController(animated: true)
+        self.showMessage(withTitle: "Success",
+                        message: "We sent a Link yout email to reset your password")
     }
 }

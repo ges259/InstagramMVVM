@@ -10,6 +10,19 @@ import JGProgressHUD
 
 
 
+extension Date {
+    static func dateString(dateDouble: Double,
+                           unitStyle: DateComponentsFormatter.UnitsStyle) -> String? {
+        let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.second, .minute, .hour, .day, .weekOfMonth]
+            formatter.maximumUnitCount = 1
+            formatter.unitsStyle = unitStyle
+        let string = formatter.string(from: Date(timeIntervalSince1970: dateDouble),
+                                to: Date())
+        
+        return "\(string ?? "error")전 "
+    }
+}
 // MARK: - UIViewController
 extension UIViewController {
     static let hud = JGProgressHUD(style: .dark)
@@ -18,7 +31,7 @@ extension UIViewController {
         // Gradient_Layer
         let gradient = CAGradientLayer()
             gradient.colors = [UIColor.systemPurple.cgColor,
-                           UIColor.systemBlue.cgColor]
+                               UIColor.systemBlue.cgColor]
             gradient.locations = [0, 1]
             gradient.frame = view.frame
         self.view.layer.addSublayer(gradient)
@@ -26,7 +39,6 @@ extension UIViewController {
 
     func showLoader(_ show: Bool) {
         self.view.endEditing(true)
-
         if show {
             UIViewController.hud.show(in: view)
         } else {
@@ -48,10 +60,14 @@ extension UIViewController {
 // MARK: - UIButton
 extension UIButton {
     func attributedTitle(firstPart: String, secondPart: String) {
-        let atts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font: UIFont.systemFont(ofSize: 16)]
+        let atts: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor(white: 1, alpha: 0.87),
+            .font: UIFont.systemFont(ofSize: 16)]
         let attributedTitle = NSMutableAttributedString(string: "\(firstPart) ", attributes: atts)
         
-        let boldAtts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font: UIFont.boldSystemFont(ofSize: 16)]
+        let boldAtts: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor(white: 1, alpha: 0.87),
+            .font: UIFont.boldSystemFont(ofSize: 16)]
         attributedTitle.append(NSAttributedString(string: secondPart, attributes: boldAtts))
         
         setAttributedTitle(attributedTitle, for: .normal)
@@ -76,10 +92,10 @@ extension UIButton {
                       borderWidth: CGFloat = 0.5) -> UIButton {
         let btn = UIButton()
         // [Title]
-        btn.setTitle(title, for: .normal)
-        btn.setTitleColor(titleColor, for: .normal)
+            btn.setTitle(title, for: .normal)
+            btn.setTitleColor(titleColor, for: .normal)
         // [Font]
-        btn.titleLabel?.font = fontName == .bold
+            btn.titleLabel?.font = fontName == .bold
             ? UIFont.boldSystemFont(ofSize: fontSize)
             : UIFont.systemFont(ofSize: fontSize)
         // [Border]
@@ -249,7 +265,6 @@ extension UILabel {
         // text Color
         lbl.textColor = textColor
         
-        
         // font
         lbl.font = fontName == .bold
             ? UIFont.boldSystemFont(ofSize: fontSize)
@@ -349,7 +364,6 @@ extension UITextField {
 
 // MARK: - NSMutableAttributedString
 extension NSMutableAttributedString {
-    
     func attributedText(type1TextString: String,
                         type1Foreground: UIColor = UIColor(white: 1, alpha: 0.7),
                         type1FontName: FontStyleEnum = FontStyleEnum.system,
@@ -364,7 +378,6 @@ extension NSMutableAttributedString {
                         type3Foreground: UIColor? = nil,
                         type3FontName: FontStyleEnum? = nil,
                         type3FontSize: CGFloat? = nil
-                        
     ) -> NSMutableAttributedString {
         
         // UIFont 설정
@@ -391,7 +404,9 @@ extension NSMutableAttributedString {
            let type3Foreground = type3Foreground
         {
             // type 3 - font 설정
-            let type3Font: UIFont = type3FontName == FontStyleEnum.system ? UIFont.systemFont(ofSize: type1FontSize) : UIFont.boldSystemFont(ofSize: type3FontSize)
+            let type3Font: UIFont = type3FontName == FontStyleEnum.system
+            ? UIFont.systemFont(ofSize: type3FontSize)
+            : UIFont.boldSystemFont(ofSize: type3FontSize)
             
             attributedTitle.append(NSAttributedString(
                 string: type3TextString,

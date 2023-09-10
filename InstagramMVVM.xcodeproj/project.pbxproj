@@ -57,6 +57,7 @@
 		5FCA64BC2AABD0EA00FF478F /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA64BB2AABD0EA00FF478F /* Enum.swift */; };
 		5FCA64BE2AABE41500FF478F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA64BD2AABE41500FF478F /* NotificationService.swift */; };
 		5FCA64C02AAC017000FF478F /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA64BF2AAC017000FF478F /* NotificationViewModel.swift */; };
+		5FFBACE92AAD491000AA9CDC /* ResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFBACE82AAD491000AA9CDC /* ResetPasswordController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		5FCA64BB2AABD0EA00FF478F /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		5FCA64BD2AABE41500FF478F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5FCA64BF2AAC017000FF478F /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		5FFBACE82AAD491000AA9CDC /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			children = (
 				5F3AAA092AA798F000D06E0B /* LoginController.swift */,
 				5F3AAA0B2AA798FF00D06E0B /* RegistrationController.swift */,
+				5FFBACE82AAD491000AA9CDC /* ResetPasswordController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				5FA29C5F2AA7EDAF000C90CF /* AuthService.swift in Sources */,
 				5F8376182AA924A2003FAD7E /* SearchTableViewModel.swift in Sources */,
 				5F5AEA6D2AA761FC00E25835 /* MainTapContoller.swift in Sources */,
+				5FFBACE92AAD491000AA9CDC /* ResetPasswordController.swift in Sources */,
 				5FCA64C02AAC017000FF478F /* NotificationViewModel.swift in Sources */,
 				5F302B0C2AAA8F9F00CFEFFB /* ConmmentController.swift in Sources */,
 				5F5AEA752AA7637D00E25835 /* NotificationsController.swift in Sources */,

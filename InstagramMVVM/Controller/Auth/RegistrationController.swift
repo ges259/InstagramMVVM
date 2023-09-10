@@ -22,63 +22,44 @@ final class RegisterationController: UIViewController {
     
     
     // MARK: - Button
-    private lazy var plusPhotoBtn: UIButton = {
-        let btn = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "plus_photo"), tintColor: UIColor.white)
-            btn.addTarget(self, action: #selector(self.handlePhotoTap), for: .touchUpInside)
-        return btn
-    }()
+    private lazy var plusPhotoBtn: UIButton = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "plus_photo"), tintColor: UIColor.white)
     
     private lazy var alreadyHaveAcccoutBtn: UIButton = {
         let btn = UIButton()
             btn.setAttributedTitle(NSMutableAttributedString().attributedText(
                 type1TextString: "Already Have an account?   ",
                 type2TextString: "Sign In"), for: .normal)
-            btn.addTarget(self, action: #selector(self.handleShowLogin),
-                          for: .touchUpInside)
         return btn
     }()
     
-    private lazy var signUpBtn: UIButton = {
-        let btn = UIButton().loginButton(title: "Sign Up")
-            btn.addTarget(self, action: #selector(self.handleSignUp), for: .touchUpInside)
-        return btn
-    }()
+    private lazy var signUpBtn: UIButton = UIButton().loginButton(title: "Sign Up")
     
     
     
     
     // MARK: - TextField
-    private lazy var emailTextField: UITextField = {
-        return UITextField().loginTextField(keyboardType: .emailAddress,
-                                            placeholerText: "Email")
-    }()
+    private lazy var emailTextField: UITextField = UITextField().loginTextField(keyboardType: .emailAddress,
+                                                                                placeholerText: "Email")
     
-    private lazy var passwordTextField: UITextField = {
-        return UITextField().loginTextField(placeholerText: "Password",
-                                            isSecure: true)
-    }()
+    private lazy var passwordTextField: UITextField = UITextField().loginTextField(placeholerText: "Password",
+                                                                                   isSecure: true)
     
-    private lazy var fullNameTextField: UITextField = {
-        return UITextField().loginTextField(placeholerText: "FullName")
-    }()
+    private lazy var fullNameTextField: UITextField = UITextField().loginTextField(placeholerText: "FullName")
     
-    private lazy var userNameTextField: UITextField = {
-        return UITextField().loginTextField(placeholerText: "usreName")
-    }()
+    private lazy var userNameTextField: UITextField = UITextField().loginTextField(placeholerText: "usreName")
     
     
     
     
     // MARK: - StackView
-    private lazy var stackView: UIStackView = {
-        return UIStackView().stackView(arrangedSubviews: [self.emailTextField,
-                                                          self.passwordTextField,
-                                                          self.fullNameTextField,
-                                                          self.userNameTextField,
-                                                          self.signUpBtn],
-                                       axis: .vertical,
-                                       spacing: 15)
-    }()
+    private lazy var stackView: UIStackView = UIStackView().stackView(arrangedSubviews:
+                                                                        [self.emailTextField,
+                                                                         self.passwordTextField,
+                                                                         self.fullNameTextField,
+                                                                         self.userNameTextField,
+                                                                         self.signUpBtn],
+                                                                      axis: .vertical,
+                                                                      spacing: 15)
     
     
     
@@ -89,7 +70,7 @@ final class RegisterationController: UIViewController {
         super.viewDidLoad()
         
         self.configureUI()
-        self.configureNotificationObservers()
+        self.addSelectors()
     }
     
     
@@ -118,15 +99,25 @@ final class RegisterationController: UIViewController {
         // dontHaveAcccoutBtn
         self.view.addSubview(self.alreadyHaveAcccoutBtn)
         self.alreadyHaveAcccoutBtn.anchor(bottom: self.view.safeAreaLayoutGuide.bottomAnchor,
-                                       centerX: self.view)
+                                          centerX: self.view)
     }
     
     
-    private func configureNotificationObservers() {
+    
+    
+    
+    private func addSelectors() {
+        // TextField
         self.emailTextField.addTarget(self, action: #selector(self.textDidChange), for: .editingChanged)
         self.passwordTextField.addTarget(self, action: #selector(self.textDidChange), for: .editingChanged)
         self.fullNameTextField.addTarget(self, action: #selector(self.textDidChange), for: .editingChanged)
         self.userNameTextField.addTarget(self, action: #selector(self.textDidChange), for: .editingChanged)
+        // plusPhotoBtn
+        self.plusPhotoBtn.addTarget(self, action: #selector(self.handlePhotoTap), for: .touchUpInside)
+        // alreadyHaveAcccoutBtn
+        self.alreadyHaveAcccoutBtn.addTarget(self, action: #selector(self.handleShowLogin), for: .touchUpInside)
+        // signUpBtn
+        self.signUpBtn.addTarget(self, action: #selector(self.handleSignUp), for: .touchUpInside)
     }
     
     

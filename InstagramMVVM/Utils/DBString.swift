@@ -11,8 +11,8 @@ import Firebase
 let DB_REF: DatabaseReference = Database.database().reference()
 
 let USER_REF: DatabaseReference = DB_REF.child("users")
-let FOLLOWERS_REF: DatabaseReference = DB_REF.child("following")
-let FOLLOWING_REF: DatabaseReference = DB_REF.child("followers")
+let FOLLOWING_REF: DatabaseReference = DB_REF.child("following")
+let FOLLOWERS_REF: DatabaseReference = DB_REF.child("followers")
 let POSTS_REF: DatabaseReference = DB_REF.child("posts")
 let USER_POSTS_REF: DatabaseReference = DB_REF.child("user-posts")
 let NOTIFICATIONS_REF: DatabaseReference = DB_REF.child("notifications")

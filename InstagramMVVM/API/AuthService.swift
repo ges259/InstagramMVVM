@@ -62,4 +62,16 @@ struct AuthService {
             }
         }
     }
+    
+    static func resetPassword(withEmail email: String,
+                              completion: @escaping ((Bool)) -> Void) {
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                print("DEBUG: \(#function) - resetPassword Error \(error.localizedDescription)")
+                completion(true)
+            } else { completion(false) }
+            
+        }
+    }
 }

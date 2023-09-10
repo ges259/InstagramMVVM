@@ -28,7 +28,7 @@ struct NotificationViewModel {
             type2FontName: .system,
             type2FontSize: 14,
         
-            type3TextString: "   2m",
+            type3TextString: "   \(self.notifiationTime ?? "")",
             type3Foreground: UIColor.lightGray,
             type3FontName: .system,
             type3FontSize: 12)
@@ -53,11 +53,16 @@ struct NotificationViewModel {
         : UIColor.white
     }
     
+    var notifiationTime: String? {
+        return Date.dateString(dateDouble: self.notification.timeStamp,
+                               unitStyle: .abbreviated)
+    }
+    
+    
     
 
     // Follow_Type -> false
     // other -> true
-//    var notificationFollowType: Bool { return !(self.notification.type == .follow)}
     var notificationType: NotificationEnum { return notification.type }
     
     

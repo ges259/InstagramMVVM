@@ -20,12 +20,8 @@ final class NotificationCell: UITableViewCell {
     
     private let postImgView: UIImageView = UIImageView().imageConfig(userInteraction: true)
     
-    private let infoLabel: UILabel = {
-        let lbl = UILabel().labelConfig(fontName: .bold,
-                                        fontSize: 14)
-            lbl.numberOfLines = 0
-        return lbl
-    }()
+    private let infoLabel: UILabel = UILabel().labelConfig(fontName: .bold,
+                                                           fontSize: 14)
     
     private lazy var followBtn: UIButton = UIButton().buttonConfig(title: "Loading",
                                                                    fontName: FontStyleEnum.bold,
@@ -73,6 +69,7 @@ final class NotificationCell: UITableViewCell {
                                 width: 48, height: 48,
                                 centerY: self)
         // infoLabel
+        self.infoLabel.numberOfLines = 0
         self.contentView.addSubview(self.infoLabel)
         self.infoLabel.anchor(leading: self.profileImgView.trailingAnchor, paddingLeading: 8,
                               centerY: self.profileImgView)
@@ -107,12 +104,13 @@ final class NotificationCell: UITableViewCell {
    
     
     private func infoLabelAnchor(type: NotificationEnum) {
+        let width = self.frame.width
         // .follow
         if type == .follow {
             self.followBtn.isHidden = false
             self.postImgView.isHidden = true
             
-            self.infoLabel.setWidth(self.frame.width - 173)
+            self.infoLabel.preferredMaxLayoutWidth = width - 170
             
             
         // .comment || .like
@@ -120,7 +118,7 @@ final class NotificationCell: UITableViewCell {
             self.followBtn.isHidden = true
             self.postImgView.isHidden = false
             
-            self.infoLabel.setWidth(self.frame.width - 140)
+            self.infoLabel.preferredMaxLayoutWidth = width - 135
         }
     }
     
@@ -134,12 +132,9 @@ final class NotificationCell: UITableViewCell {
     // MARK: - Selectors
     @objc private func handleFollowBtnTap() {
         guard let viewModel = self.viewModel else { return }
-        
-        if viewModel.userIsFollow {
-            self.delegate?.cell(self, wantsToUnFollow: viewModel.notificationUid)
-        } else {
-            self.delegate?.cell(self, wantsToFollow: viewModel.notificationUid)
-        }
+        viewModel.userIsFollow
+        ? self.delegate?.cell(self, wantsToUnFollow: viewModel.notificationUid)
+        : self.delegate?.cell(self, wantsToFollow: viewModel.notificationUid)
     }
     
     @objc private func handlePostTap() {

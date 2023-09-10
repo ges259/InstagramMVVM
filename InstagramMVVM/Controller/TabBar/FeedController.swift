@@ -11,16 +11,11 @@ import FirebaseAuth
 final class FeedContoller: UICollectionViewController {
     
     // MARK: - Properties
-    private var posts = [Post]() {
-        didSet { self.collectionView.reloadData() }
-    }
+    private var posts = [Post]() { didSet { self.collectionView.reloadData() } }
     
-    var post: Post?
+    var post: Post? { didSet { self.collectionView.reloadData() } }
     
-    
-    
-    
-    
+    let refresher = UIRefreshControl()
 
     
     
@@ -32,7 +27,12 @@ final class FeedContoller: UICollectionViewController {
         
         self.configureUI()
         
-        self.fetchPosts()
+        if post != nil {
+            self.collectionView.isScrollEnabled = false
+            self.checkPostLiked()
+        } else {
+            self.fetchPosts()
+        }
     }
     
     
@@ -52,11 +52,8 @@ final class FeedContoller: UICollectionViewController {
                 action: #selector(self.handleLogout))
         }
         
-        
-        let refresher = UIRefreshControl()
-            refresher.addTarget(self, action: #selector(self.handleRefresh), for: .valueChanged)
-        self.collectionView.refreshControl = refresher
-        
+        self.refresher.addTarget(self, action: #selector(self.handleRefresh), for: .valueChanged)
+        self.collectionView.refreshControl = self.refresher
     }
     
     
@@ -73,11 +70,11 @@ final class FeedContoller: UICollectionViewController {
                 nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
 
-        } catch {
-            print("DEBUG: Failed to sign out")
-        }
+        } catch { print("DEBUG: Failed to sign out") }
     }
+    
     @objc func handleRefresh() {
+        self.posts.removeAll()
         self.fetchPosts()
     }
     
@@ -86,11 +83,16 @@ final class FeedContoller: UICollectionViewController {
     
     // MARK: - API
     private func fetchPosts() {
-        guard self.post == nil else { return }
-        PostService.fetchPostAndcheckLiked { posts in
-            self.posts.removeAll()
-            self.posts = posts
-            self.collectionView.refreshControl?.endRefreshing()
+        self.refresher.endRefreshing()
+        PostService.fetchFeedPost { postIds in
+            self.posts = postIds
+        }
+        
+    }
+    private func checkPostLiked() {
+        guard let postId = post?.postId else { return }
+        PostService.checkPostLikes(postId: postId) { didLike in
+            self.post?.didLike = didLike
         }
     }
 }

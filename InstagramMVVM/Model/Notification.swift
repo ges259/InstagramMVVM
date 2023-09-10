@@ -13,7 +13,7 @@ struct Notification {
     var postId: String?
     var postImageUrl: String?
     
-    let timeStamp: Int
+    let timeStamp: Double
     
     let notificationId: String
     let type: NotificationEnum
@@ -27,10 +27,18 @@ struct Notification {
         self.currentUid = dictionary[DBString.uid] as? String ?? ""
         self.postId = dictionary[DBString.postId] as? String ?? ""
         self.postImageUrl = dictionary[DBString.postImageUrl] as? String ?? ""
-        self.timeStamp = dictionary[DBString.timeStamp] as? Int ?? 0
+        self.timeStamp = dictionary[DBString.timeStamp] as? Double ?? 0
         self.type = NotificationEnum(rawValue: dictionary[DBString.type] as? Int ?? 0) ?? NotificationEnum.like
         self.notificationId = dictionary[DBString.notificationId] as? String ?? ""
         self.profileImageURL = dictionary[DBString.profileImgUrl] as? String ?? ""
         self.userName = dictionary[DBString.userName] as? String ?? ""
+        
+//        if let timeStamp = dictionary[DBString.timeStamp] as? Double {
+//            self.timeStamp = Date(timeIntervalSince1970: timeStamp)
+//        } else {
+//            self.timeStamp = nil
+//        }
+
     }
+    
 }

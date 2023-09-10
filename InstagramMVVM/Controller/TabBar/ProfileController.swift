@@ -77,7 +77,7 @@ final class ProfileController: UICollectionViewController {
     }
     
     private func fetchPosts() {
-        PostService.fetchPostsCount(uid: user.uid) { posts in
+        PostService.fetchPostsWithUid(uid: user.uid) { posts in
             self.posts = posts
             self.collectionView.reloadData()
         }

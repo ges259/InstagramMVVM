@@ -23,18 +23,13 @@ final class CommentAccessoryView: UIView {
         return tv
     }()
     
-    private lazy var postBtn: UIButton = {
-        let btn = UIButton().buttonConfig(title: "Post",
-                                          fontName: FontStyleEnum.bold,
-                                          fontSize: 14)
-            btn.addTarget(self, action: #selector(self.handlePostTap), for: .touchUpInside)
-        return btn
-    }()
+    private lazy var postBtn: UIButton = UIButton().buttonConfig(title: "Post",
+                                                                 fontName: FontStyleEnum.bold,
+                                                                 fontSize: 14)
     
     
-    private let dividerView: UIView = {
-        return UIView().backgroundColorView(color: UIColor.lightGray )
-    }()
+    private let dividerView: UIView = UIView().backgroundColorView(color: UIColor.lightGray)
+        
     
     
     
@@ -47,6 +42,7 @@ final class CommentAccessoryView: UIView {
         super.init(frame: frame)
         
         self.configureUI()
+        self.addSelectors()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -65,7 +61,6 @@ final class CommentAccessoryView: UIView {
         self.backgroundColor = UIColor.white
         // auto_resizing_Height
         self.autoresizingMask = .flexibleHeight
-        
         // [Auto_Layout]
         // postBtn
         self.addSubview(self.postBtn)
@@ -89,6 +84,10 @@ final class CommentAccessoryView: UIView {
     func clearCommentTextView() {
         self.commentView.text = nil
         self.commentView.placeholderLabel.isHidden = false
+    }
+    
+    private func addSelectors() {
+        self.postBtn.addTarget(self, action: #selector(self.handlePostTap), for: .touchUpInside)
     }
     
     

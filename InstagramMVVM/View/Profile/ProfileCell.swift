@@ -20,9 +20,7 @@ final class ProfileCell: UICollectionViewCell {
     
     
     // MARK: - ImageView
-    private let postImageView: UIImageView = {
-        return UIImageView().imageConfig()
-    }()
+    private let postImageView: UIImageView = UIImageView().imageConfig()
     
     
     
@@ -56,12 +54,5 @@ final class ProfileCell: UICollectionViewCell {
     private func configure(){
         guard let viewModel = self.viewModel else { return }
         self.postImageView.sd_setImage(with: viewModel.imageURL)
-        
     }
-    
-    
-    
-    
-    
-    
 }

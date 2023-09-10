@@ -31,71 +31,51 @@ final class ProfileHeader: UICollectionReusableView {
     
     
     // MARK: - Button
-    private let nameLabel: UILabel = {
-        return UILabel().labelConfig(fontName: .bold,
-                                     fontSize: 14)
-    }()
+    private let nameLabel: UILabel = UILabel().labelConfig(fontName: .bold,
+                                                           fontSize: 14)
     
-    private lazy var postLabel: UILabel = {
-        return UILabel().profileLabel()
-    }()
-    private lazy var followersLabel: UILabel = {
-        return UILabel().profileLabel()
-    }()
-    private lazy var followingLabel: UILabel = {
-        return UILabel().profileLabel()
-    }()
+    private lazy var postLabel: UILabel = UILabel().profileLabel()
     
-    private lazy var editProfileBtn: UIButton = {
-        let btn = UIButton().buttonConfig(title: "Loading",
-                                          fontName: FontStyleEnum.bold,
-                                          fontSize: 14,
-                                          borderColor: UIColor.lightGray)
-            btn.addTarget(self, action: #selector(self.handleEditPrifileBtnTap), for: .touchUpInside)
-        return btn
-    }()
+    private lazy var followersLabel: UILabel = UILabel().profileLabel()
     
-    private lazy var gridBtn: UIButton = {
-        return UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "grid"))
-    }()
-    private lazy var listBtn: UIButton = {
-        return UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "list"))
-    }()
-    private lazy var bookmarkBtn: UIButton = {
-        return UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "ribbon"))
-    }()
+    
+    private lazy var followingLabel: UILabel = UILabel().profileLabel()
+    
+    private lazy var editProfileBtn: UIButton = UIButton().buttonConfig(fontName: FontStyleEnum.bold,
+                                                                        fontSize: 14,
+                                                                        borderColor: UIColor.lightGray)
+    
+    private lazy var gridBtn: UIButton = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "grid"))
+        
+    private lazy var listBtn: UIButton = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "list"))
+        
+    private lazy var bookmarkBtn: UIButton = UIButton().ImgBtnConfig(img: #imageLiteral(resourceName: "ribbon"))
     
     
     
     
     
     // MARK: - StackView
-    private lazy var stackView: UIStackView = {
-        return UIStackView().stackView(arrangedSubviews: [self.postLabel,
-                                                          self.followersLabel,
-                                                          self.followingLabel],
-                                       axis: .horizontal,
-                                       distribution: .fillEqually)
-    }()
-    private lazy var buttonStackView: UIStackView = {
-        return UIStackView().stackView(arrangedSubviews: [self.gridBtn,
-                                                          self.listBtn,
-                                                          self.bookmarkBtn],
-                                       axis: .horizontal,
-                                       distribution: .fillEqually)
-    }()
-    
-    
-    
-    
+    private lazy var stackView: UIStackView = UIStackView().stackView(arrangedSubviews:
+                                                                        [self.postLabel,
+                                                                         self.followersLabel,
+                                                                         self.followingLabel],
+                                                                      axis: .horizontal,
+                                                                      distribution: .fillEqually)
+        
+    private lazy var buttonStackView: UIStackView = UIStackView().stackView(arrangedSubviews:
+                                                                                [self.gridBtn,
+                                                                                 self.listBtn,
+                                                                                 self.bookmarkBtn],
+                                                                            axis: .horizontal,
+                                                                            distribution: .fillEqually)
+        
     
     // MARK: - UIView
-    private let topSeparator: UIView = {
-        return UIView().backgroundColorView(color: UIColor.black)
-    }()
-    private let bottomSeparator: UIView = {
-        return UIView().backgroundColorView(color: UIColor.black)
-    }()
+    private let topSeparator: UIView = UIView().backgroundColorView(color: UIColor.black)
+        
+    private let bottomSeparator: UIView = UIView().backgroundColorView(color: UIColor.black)
+        
     
     
     
@@ -108,6 +88,7 @@ final class ProfileHeader: UICollectionReusableView {
         super.init(frame: frame)
         
         self.configureUI()
+        self.addSelectors()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -175,9 +156,11 @@ final class ProfileHeader: UICollectionReusableView {
         self.editProfileBtn.backgroundColor = viewModel.followBtnBackgroundColor
     }
     
+    
+    private func addSelectors() {
+        self.editProfileBtn.addTarget(self, action: #selector(self.handleEditPrifileBtnTap), for: .touchUpInside)
+    }
      
-    
-    
     
     
     
